@@ -64,10 +64,11 @@ function buildBrick2() {
 }
 
 
-/*0930    */
+
 
 function buildBigBall() {
-  var ball= new THREE.Mesh(new THREE.SphereGeometry(25,32,32),new THREE.MeshLambertMaterial());
+  var ball= new THREE.Mesh(new THREE.SphereGeometry(35,32,32),new THREE.MeshLambertMaterial());
+  //??
   return ball;
 }
 
