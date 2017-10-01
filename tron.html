@@ -19,7 +19,7 @@
 <div id="info"> Inelastic collision
 <br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)
 </div>
-
+<title>Tron game</title>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
 <script src="https://jyunming-chen.github.io/tutsplus/js/KeyboardState.js"></script>
@@ -334,7 +334,7 @@
 
       if (ball.position.x + 1 >= 75 || ball.position.x - 1 <= -75 || ball.position.y + 1 >= 75 || ball.position.y - 1 < -75 || ball.position.z + 1 > 75 || ball.position.z - 1 < -75)
         if(speed > 0.0015)
-          speed += -0.0003;
+          speed -= .0003;
 
       if(speed < 0.002)
         ball.material.color = new THREE.Color(0x0000ff);
@@ -342,7 +342,10 @@
         console.log(speed);
 
       if(uu > 1){
-
+        console.log(ball.position.distanceTo( new THREE.Vector3(0,0,0) ));
+        if(ball.position.distanceTo( new THREE.Vector3(0,0,0) ) < 41  && ball.position.distanceTo( new THREE.Vector3() ) > 39){
+          ball.position.copy(tank.localToWorld( new THREE.Vector3(0,0,0) ) );
+        }
         dataPoints = [];
         fireStart = false;
         uu = 0;
