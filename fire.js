@@ -289,6 +289,7 @@ function raytest() {
                       raycasterR5.set(intersectsR4[0].point, r.normalize());
                       intersectsR5 = raycasterR5.intersectObjects(pickables);
 
+
                   }
 
               }
