@@ -157,6 +157,8 @@ function init() {
   ball.visible = false;
   scene.add(ball);
 
+  bigBall=buildBigball();
+
   for(var i = 0 ; i<6 ; i++){
     targetarr[i] = buildTarget();
     scene.add(targetarr[i]);
