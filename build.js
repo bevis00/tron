@@ -69,7 +69,7 @@ function buildBrick2() {
 function buildBigBall() {
   var ball= new THREE.Mesh(new THREE.SphereGeometry(35,32,32),new THREE.MeshLambertMaterial());
   //??
-  return ball;
+  scene.add(ball);
 }
 
 
