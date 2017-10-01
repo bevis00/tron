@@ -1,3 +1,4 @@
+
 function makeLaser() {
 
   var laserBase = barrel.clone().position;
@@ -39,6 +40,7 @@ function makeLaserR() {
   return line;
 
 }
+
 function raytest() {
 
   var laserdir = barrel.clone().localToWorld(new THREE.Vector3(0, 1, 0)).sub(barrel.clone().localToWorld(new THREE.Vector3(0, 0, 0)));
@@ -281,6 +283,7 @@ function raytest() {
 function fireMove() {
 
 	dataPoints.push (
+
   	barrel.localToWorld(new THREE.Vector3(0, 0, 0)),
     barrel.localToWorld(new THREE.Vector3(0, 0, 0)).add(barrel.localToWorld(new THREE.Vector3(0, 0, 0)).add(intersects[0].point).multiplyScalar (1/2)).multiplyScalar (1/2),
     barrel.localToWorld(new THREE.Vector3(0, 0, 0)).add(intersects[0].point).multiplyScalar (1/2),
@@ -312,12 +315,14 @@ function fireMove() {
     intersectsR4[0].point.clone().add(intersectsR5[0].point).multiplyScalar (1/2).add(intersectsR5[0].point).multiplyScalar (1/2),
     intersectsR5[0].point,
     intersectsR5[0].point
+    
   );
 
   curve = new THREE.CatmullRomCurve3(dataPoints);
   curve.type = "catmullrom";
 
 }
+
 function Targeting(){
 
   if(ball.position.distanceTo(targetarr[0].position)<5){
@@ -344,4 +349,5 @@ function Targeting(){
     targetarr[5].position.set(myRand(-65,65),myRand(-65,65),55);
     targetarr[5].rotation.x=myRand(0,3);
   }
+
 }
