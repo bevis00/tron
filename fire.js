@@ -86,6 +86,10 @@ function raytest() {
       n = new THREE.Vector3(0, 0, 1);
 
     }
+    if (intersects[0].object.name ==="Breakout"){
+
+      n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
+    }
 
       var r = laserdir.sub(n.multiplyScalar(2 * (laserdir.dot(n))));
 
@@ -130,6 +134,11 @@ function raytest() {
           n = new THREE.Vector3(0, 0, 1);
 
         }
+        if (intersectsR[0].object.name ==="Breakout"){
+
+          n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
+        }
+
 
           r = r.sub(n.multiplyScalar(2 * (r.dot(n))));
 
@@ -173,6 +182,10 @@ function raytest() {
 
               n = new THREE.Vector3(0, 0, 1);
 
+            }
+            if (intersectsR2[0].object.name ==="Breakout"){
+
+              n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
             }
 
               r = r.sub(n.multiplyScalar(2 * (r.dot(n))));
@@ -218,6 +231,10 @@ function raytest() {
                   n = new THREE.Vector3(0, 0, 1);
 
                 }
+                if (intersectsR3[0].object.name ==="Breakout"){
+
+                  n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
+                }
 
                   r = r.sub(n.multiplyScalar(2 * (r.dot(n))));
 
@@ -261,6 +278,10 @@ function raytest() {
 
                       n = new THREE.Vector3(0, 0, 1);
 
+                    }
+                    if (intersectsR4[0].object.name ==="Breakout"){
+
+                      n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
                     }
 
                       r = r.sub(n.multiplyScalar(2 * (r.dot(n))));
@@ -315,7 +336,7 @@ function fireMove() {
     intersectsR4[0].point.clone().add(intersectsR5[0].point).multiplyScalar (1/2).add(intersectsR5[0].point).multiplyScalar (1/2),
     intersectsR5[0].point,
     intersectsR5[0].point
-    
+
   );
 
   curve = new THREE.CatmullRomCurve3(dataPoints);
