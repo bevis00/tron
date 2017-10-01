@@ -1,4 +1,6 @@
+
 function changePlane(){
+
   var detection = tank.localToWorld(new THREE.Vector3(10, 0, 0));
   //console.log(detection);
 
@@ -373,4 +375,5 @@ function changePlane(){
     vP = v.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
   }
+  
 }

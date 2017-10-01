@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <style>
-.dbutton {
-  padding: 4px;
-  background: green;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.dbutton.selected {
-  background: orange;
-}
-
+  #info {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: #ffff00
+  }
 </style>
-
 </head>
-<h1 style="text-align:center"> Inelastic collision
-<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)
-</h1>
 
-<hr>
-<div id="container2" style="background:pink; float:left; margin:3px; width:45vw; height:45vw"></div>
-<div id="container" style="float:right; margin:3px; width:45vw; height:45vw"></div>
-<br>
-<hr style="clear:both">
+<body>
+
+<div id="info"> Inelastic collision
+<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)
+</div>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
@@ -36,376 +30,343 @@
 <script src="build.js"></script>
 
 <script>
-var camera, scene, renderer;
-var camera2, scene2, renderer2;
 
-var controls;
-var keyboard = new KeyboardState();
+  var camera, scene, renderer;
 
-var raycaster = new THREE.Raycaster();
-var raycasterR = new THREE.Raycaster();
-var raycasterR2 = new THREE.Raycaster();
-var raycasterR3 = new THREE.Raycaster();
-var raycasterR4 = new THREE.Raycaster();
-var raycasterR5 = new THREE.Raycaster();
+  var keyboard = new KeyboardState();
 
-
-var tank, barrel, turret, ball, head;
-var bigBall;
-var tankP, avatarBody, v, vP = new THREE.Vector3(1, 0, 0);
-
-var cameraOffset;
-var upTemp = new THREE.Vector3();
-
-var go = 0;
-var angle = 0;
-var change = 0;
-var changeX = 0, changeY = 1, changeZ = 0;
-
-var pickables = [];
-var wallPx = [], wallNx = [], wallPy = [], wallNy = [], wallPz = [], wallNz = [];
-var brick1, brick2;
-
-var intersects, intersectsR, intersectsR2, intersectsR3, intersectsR4, intersectsR5;
-var laser, laserR;
-var targetarr = [];
-
-var curve;
-var dataPoints = [];
-var uu = 0;
-var fireStart = false;
-var fire = true;
-
-var speed = 0.006;
-
-init();
-animate();
-
-function init() {
-
-  var ww = $("#container").innerWidth();
-  var hh = $("#container").innerHeight();
-
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(ww, hh);
-  renderer.setClearColor(0x888888);
-  $("#container").append(renderer.domElement);
-
-  renderer2 = new THREE.WebGLRenderer();
-  renderer2.setSize(ww, hh);
-  renderer2.setClearColor(0xbbbbbb);
-  $("#container2").append(renderer2.domElement);
-
-  ////////////////////////////////////////////////
-
-  scene = new THREE.Scene();
-  scene.add(new THREE.AxisHelper(25));
-
-  camera = new THREE.PerspectiveCamera(90, ww / hh, 1, 1000);
-  camera.position.z = 50;
-
-  camera2 = new THREE.PerspectiveCamera(50, ww / hh, 1, 1000);
-  camera2.position.z = 250;
-
-  var grid = new THREE.GridHelper(150, 15, 'red', 'white');
-  //scene.add(grid);
-  grid.position.y = -75;
-
-  controls = new THREE.OrbitControls(camera2, renderer2.domElement);
-
-  //////////////////////////////////////////////////////////////////////////////
-
-  var pointLight1 = new THREE.PointLight( 0xffffff, 1, 160 );
-	pointLight1.position.set( -37.5, 37.5, -37.5 );
-	scene.add( pointLight1 );
-
-  var pointLight2 = pointLight1.clone();
-	pointLight2.position.set( -37.5, 37.5, 37.5 );
-	scene.add( pointLight2 );
-
-  var pointLight3 = pointLight1.clone();
-	pointLight3.position.set( 37.5, -37.5, -37.5 );
-	scene.add( pointLight3 );
-
-  var pointLight4 = pointLight1.clone();
-	pointLight4.position.set( 37.5, -37.5, 37.5 );
-	scene.add( pointLight4 );
-
-  //////////////////////////////////////////////////////////////////////////////
-
-  tank = buildTank();
-  turret = new THREE.Object3D();
-
-  barrel = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 10), new THREE.MeshBasicMaterial({
-    color: 0x222222
-  }));
-  barrel.position.x = 4;
-  barrel.rotation.z = -Math.PI / 2;
-
-  head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0x664c14}));
-
-  turret.add(head, barrel);
-  turret.position.y = 5;
-
-  tank.add(turret);
-  scene.add(tank);
-
-  ////////////////////////////////////////////////////////////////////////
-
-  ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshBasicMaterial({
-    color: 0xff0000
-  }));
-  ball.visible = false;
-  scene.add(ball);
-
-  buildBigBall();
-
-  for(var i = 0 ; i<6 ; i++){
-    targetarr[i] = buildTarget();
-    scene.add(targetarr[i]);
-  }
-  targetarr[0].position.set(-55,myRand(-65,65),myRand(-65,65));
-  targetarr[0].rotation.y = Math.PI / 2;
-  targetarr[1].position.set(55,myRand(-65,65),myRand(-65,65));
-  targetarr[1].rotation.y = -Math.PI / 2;
-  targetarr[2].position.set(myRand(-65,65),-55,myRand(-65,65));
-  targetarr[2].rotation.x = -Math.PI / 2;
-  targetarr[3].position.set(myRand(-65,65),55,myRand(-65,65));
-  targetarr[3].rotation.x = Math.PI / 2;
-  targetarr[4].position.set(myRand(-65,65),myRand(-65,65),-55);
-  targetarr[5].position.set(myRand(-65,65),myRand(-65,65),55);
-
-  /////////////////////////////////////////////////////////////////////////////
-  bildWall();
+  var raycaster = new THREE.Raycaster();
+  var raycasterR = new THREE.Raycaster();
+  var raycasterR2 = new THREE.Raycaster();
+  var raycasterR3 = new THREE.Raycaster();
+  var raycasterR4 = new THREE.Raycaster();
+  var raycasterR5 = new THREE.Raycaster();
 
 
+  var tank, barrel, turret, ball, head;
+  var bigBall;
+  var tankP, avatarBody, v, vP = new THREE.Vector3(1, 0, 0);
 
-  window.addEventListener('resize', onWindowResize, false);
+  var cameraOffset;
+  var upTemp = new THREE.Vector3();
 
-}
+  var go = 0;
+  var angle = 0;
+  var change = 0;
+  var changeX = 0, changeY = 1, changeZ = 0;
 
-function onWindowResize() {
+  var pickables = [];
+  var wallPx = [], wallNx = [], wallPy = [], wallNy = [], wallPz = [], wallNz = [];
+  var brick1, brick2;
 
-  var ww = $("#container").innerWidth();
-  var hh = $("#container").innerHeight();
+  var intersects, intersectsR, intersectsR2, intersectsR3, intersectsR4, intersectsR5;
+  var laser, laserR;
+  var targetarr = [];
 
-  camera.aspect = ww / hh;
-  camera.updateProjectionMatrix();
-  renderer.setSize(ww, hh);
+  var curve;
+  var dataPoints = [];
+  var uu = 0;
+  var fireStart = false;
+  var fire = true;
 
-  camera2.aspect = ww / hh;
-  camera2.updateProjectionMatrix();
+  var speed = 0.006;
 
-  renderer2.setSize(ww, hh);
+  init();
+  animate();
 
-}
+  function init() {
 
-function animate() {
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x888888);
+    $("#container").append(renderer.domElement);
 
-  keyboard.update();
-  raytest();
+    ////////////////////////////////////////////////
 
-  if (keyboard.pressed("W")) {
+    scene = new THREE.Scene();
+    scene.add(new THREE.AxisHelper(25));
 
-    go += 3;
+    camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 50;
 
-    turret.remove(laser);
-    scene.remove(laserR);
+    var grid = new THREE.GridHelper(150, 15, 'red', 'white');
+    //scene.add(grid);
+    grid.position.y = -75;
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    var pointLight1 = new THREE.PointLight( 0xffffff, 1, 160 );
+  	pointLight1.position.set( -37.5, 37.5, -37.5 );
+  	scene.add( pointLight1 );
+
+    var pointLight2 = pointLight1.clone();
+  	pointLight2.position.set( -37.5, 37.5, 37.5 );
+  	scene.add( pointLight2 );
+
+    var pointLight3 = pointLight1.clone();
+  	pointLight3.position.set( 37.5, -37.5, -37.5 );
+  	scene.add( pointLight3 );
+
+    var pointLight4 = pointLight1.clone();
+  	pointLight4.position.set( 37.5, -37.5, 37.5 );
+  	scene.add( pointLight4 );
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    tank = buildTank();
+    turret = new THREE.Object3D();
+
+    barrel = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 10), new THREE.MeshBasicMaterial({
+      color: 0x222222
+    }));
+    barrel.position.x = 4;
+    barrel.rotation.z = -Math.PI / 2;
+
+    head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0x664c14}));
+
+    turret.add(head, barrel);
+    turret.position.y = 5;
+
+    tank.add(turret);
+    scene.add(tank);
+
+    ////////////////////////////////////////////////////////////////////////
+
+    ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshBasicMaterial({
+      color: 0xff0000
+    }));
+    ball.visible = false;
+    scene.add(ball);
+
+    buildBigBall();
+
+    for(var i = 0 ; i<6 ; i++){
+      targetarr[i] = buildTarget();
+      scene.add(targetarr[i]);
+    }
+    targetarr[0].position.set(-55,myRand(-65,65),myRand(-65,65));
+    targetarr[0].rotation.y = Math.PI / 2;
+    targetarr[1].position.set(55,myRand(-65,65),myRand(-65,65));
+    targetarr[1].rotation.y = -Math.PI / 2;
+    targetarr[2].position.set(myRand(-65,65),-55,myRand(-65,65));
+    targetarr[2].rotation.x = -Math.PI / 2;
+    targetarr[3].position.set(myRand(-65,65),55,myRand(-65,65));
+    targetarr[3].rotation.x = Math.PI / 2;
+    targetarr[4].position.set(myRand(-65,65),myRand(-65,65),-55);
+    targetarr[5].position.set(myRand(-65,65),myRand(-65,65),55);
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    buildWall();
+
+    document.body.appendChild(renderer.domElement);
 
   }
 
-  if (keyboard.pressed("A")) {
+  function animate() {
 
-    change += 0.1;
+    keyboard.update();
+    raytest();
 
-    turret.remove(laser);
-    scene.remove(laserR);
+    if (keyboard.pressed("W")) {
 
-  }
+      go += 3;
 
-  if (keyboard.pressed("D")) {
-
-    change += -0.1;
-
-    turret.remove(laser);
-    scene.remove(laserR);
-
-  }
-
-  if (keyboard.pressed("I")) {
-
-    if(angle < Math.PI / 2){
-
-        angle += 0.05;
-        turret.rotation.z = angle;
+      turret.remove(laser);
+      scene.remove(laserR);
 
     }
 
-    turret.remove(laser);
-    scene.remove(laserR);
+    if (keyboard.pressed("A")) {
 
-  }
+      change += 0.035;
 
-  if (keyboard.pressed("K")) {
-
-    if(angle > 0){
-
-        angle -= 0.05;
-        turret.rotation.z = angle;
+      turret.remove(laser);
+      scene.remove(laserR);
 
     }
 
-    turret.remove(laser);
-    scene.remove(laserR);
+    if (keyboard.pressed("D")) {
 
-  }
+      change += -0.035;
 
-  if (keyboard.down("L")) {
-
-    laser = makeLaser();
-    laserR = makeLaserR();
-
-    turret.add(laser);
-    scene.add(laserR);
-
-  }
-
-  if (keyboard.up("L")) {
-
-    turret.remove(laser);
-    scene.remove(laserR);
-
-  }
-
-  if(tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x - 1 <= tank.position.x + 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x + 1 >= tank.position.x - 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y - 1 <= tank.position.y + 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y + 1 >= tank.position.y - 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z - 1 <= tank.position.z + 5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z + 1 >= tank.position.z - 5 && fire === false){
-    if(ball.visible === true)
-      head.material.color = new THREE.Color(0xffff00);
-
-    if (keyboard.down("O")) {
-
-      ball.visible = false;
-      fire = true;
+      turret.remove(laser);
+      scene.remove(laserR);
 
     }
 
-    }
-    else
-      head.material.color = new THREE.Color(0x664c14);
+    if (keyboard.pressed("I")) {
 
-  if(fire){
+      if(angle < Math.PI / 4){
 
-    if (keyboard.down("J")) {
-
-      ball.position.copy(barrel.localToWorld(new THREE.Vector3(0, 0, 0)));
-      ball.visible = true;
-      fireMove();
-      fireStart = true;
-      fire = false;
-      dataPoints = [];
-      uu = 0;
-      speed = 0.006;
-      ball.material.color = new THREE.Color(0xff0000);
-
-    }
-
-  }
-
-  if(fireStart){
-
-    uu += speed;
-
-    if(uu <= 1)
-      ball.position.copy(curve.getPointAt (uu));
-
-    for (var i = 0; i < 362; i++) {
-
-        if (ball.position.z > wallPx[i].position.z - 6 && ball.position.z < wallPx[i].position.z + 6 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4)
-          scene.remove(wallPx[i]);
-
-       if (ball.position.z > wallNx[i].position.z - 6 && ball.position.z < wallNx[i].position.z + 6 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4)
-          scene.remove(wallNx[i]);
-
-      if (ball.position.x > wallPy[i].position.x - 6 && ball.position.x < wallPy[i].position.x + 6 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4)
-          scene.remove(wallPy[i]);
-
-      if (ball.position.x > wallNy[i].position.x - 6 && ball.position.x < wallNy[i].position.x + 6 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4)
-          scene.remove(wallNy[i]);
-
-      if (ball.position.x > wallPz[i].position.x - 6 && ball.position.x < wallPz[i].position.x + 6 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4)
-          scene.remove(wallPz[i]);
-
-      if (ball.position.x > wallNz[i].position.x - 6 && ball.position.x < wallNz[i].position.x + 6 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4)
-          scene.remove(wallNz[i]);
-
-    }
-
-      for (var i = 362; i < 388; i++) {
-
-        if (ball.position.z > wallPx[i].position.z - 3 && ball.position.z < wallPx[i].position.z + 3 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4)
-          scene.remove(wallPx[i]);
-
-        if (ball.position.z > wallNx[i].position.z - 3 && ball.position.z < wallNx[i].position.z + 3 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4)
-          scene.remove(wallNx[i]);
-
-        if (ball.position.x > wallPy[i].position.x - 3 && ball.position.x < wallPy[i].position.x + 3 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4)
-          scene.remove(wallPy[i]);
-
-        if (ball.position.x > wallNy[i].position.x - 3 && ball.position.x < wallNy[i].position.x + 3 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4)
-          scene.remove(wallNy[i]);
-
-        if (ball.position.x > wallPz[i].position.x - 3 && ball.position.x < wallPz[i].position.x + 3 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4)
-          scene.remove(wallPz[i]);
-
-        if (ball.position.x > wallNz[i].position.x - 3 && ball.position.x < wallNz[i].position.x + 3 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4)
-          scene.remove(wallNz[i]);
+          angle += 0.015;
+          turret.rotation.z = angle;
 
       }
 
-
-    if (ball.position.x + 1 >= 75 || ball.position.x - 1 <= -75 || ball.position.y + 1 >= 75 || ball.position.y - 1 < -75 || ball.position.z + 1 > 75 || ball.position.z - 1 < -75)
-      if(speed > 0.0015)
-        speed += -0.0003;
-
-    if(speed < 0.002)
-      ball.material.color = new THREE.Color(0x0000ff);
-
-      console.log(speed);
-
-    if(uu > 1){
-
-      dataPoints = [];
-      fireStart = false;
-      uu = 0;
-      speed = 0.006;
+      turret.remove(laser);
+      scene.remove(laserR);
 
     }
 
+    if (keyboard.pressed("K")) {
+
+      if(angle > 0){
+
+          angle -= 0.015;
+          turret.rotation.z = angle;
+
+      }
+
+      turret.remove(laser);
+      scene.remove(laserR);
+
+    }
+
+    if (keyboard.down("L")) {
+
+      laser = makeLaser();
+      laserR = makeLaserR();
+
+      turret.add(laser);
+      scene.add(laserR);
+
+    }
+
+    if (keyboard.up("L")) {
+
+      turret.remove(laser);
+      scene.remove(laserR);
+
+    }
+
+    if(tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x - 1 <= tank.position.x + 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x + 1 >= tank.position.x - 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y - 1 <= tank.position.y + 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y + 1 >= tank.position.y - 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z - 1 <= tank.position.z + 5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z + 1 >= tank.position.z - 5 && fire === false){
+      if(ball.visible === true)
+        head.material.color = new THREE.Color(0xffff00);
+
+      if (keyboard.down("O")) {
+
+        ball.visible = false;
+        fire = true;
+
+      }
+
+      }
+      else
+        head.material.color = new THREE.Color(0x664c14);
+
+    if(fire){
+
+      if (keyboard.down("J")) {
+
+        ball.position.copy(barrel.localToWorld(new THREE.Vector3(0, 0, 0)));
+        ball.visible = true;
+        fireMove();
+        fireStart = true;
+        fire = false;
+        dataPoints = [];
+        uu = 0;
+        speed = 0.006;
+        ball.material.color = new THREE.Color(0xff0000);
+
+      }
+
+    }
+
+    if(fireStart){
+
+      uu += speed;
+
+      if(uu <= 1)
+        ball.position.copy(curve.getPointAt (uu));
+
+      for (var i = 0; i < 362; i++) {
+
+          if (ball.position.z > wallPx[i].position.z - 6 && ball.position.z < wallPx[i].position.z + 6 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4)
+            scene.remove(wallPx[i]);
+
+         if (ball.position.z > wallNx[i].position.z - 6 && ball.position.z < wallNx[i].position.z + 6 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4)
+            scene.remove(wallNx[i]);
+
+        if (ball.position.x > wallPy[i].position.x - 6 && ball.position.x < wallPy[i].position.x + 6 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4)
+            scene.remove(wallPy[i]);
+
+        if (ball.position.x > wallNy[i].position.x - 6 && ball.position.x < wallNy[i].position.x + 6 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4)
+            scene.remove(wallNy[i]);
+
+        if (ball.position.x > wallPz[i].position.x - 6 && ball.position.x < wallPz[i].position.x + 6 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4)
+            scene.remove(wallPz[i]);
+
+        if (ball.position.x > wallNz[i].position.x - 6 && ball.position.x < wallNz[i].position.x + 6 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4)
+            scene.remove(wallNz[i]);
+
+      }
+
+        for (var i = 362; i < 388; i++) {
+
+          if (ball.position.z > wallPx[i].position.z - 3 && ball.position.z < wallPx[i].position.z + 3 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4)
+            scene.remove(wallPx[i]);
+
+          if (ball.position.z > wallNx[i].position.z - 3 && ball.position.z < wallNx[i].position.z + 3 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4)
+            scene.remove(wallNx[i]);
+
+          if (ball.position.x > wallPy[i].position.x - 3 && ball.position.x < wallPy[i].position.x + 3 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4)
+            scene.remove(wallPy[i]);
+
+          if (ball.position.x > wallNy[i].position.x - 3 && ball.position.x < wallNy[i].position.x + 3 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4)
+            scene.remove(wallNy[i]);
+
+          if (ball.position.x > wallPz[i].position.x - 3 && ball.position.x < wallPz[i].position.x + 3 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4)
+            scene.remove(wallPz[i]);
+
+          if (ball.position.x > wallNz[i].position.x - 3 && ball.position.x < wallNz[i].position.x + 3 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4)
+            scene.remove(wallNz[i]);
+
+        }
+
+
+      if (ball.position.x + 1 >= 75 || ball.position.x - 1 <= -75 || ball.position.y + 1 >= 75 || ball.position.y - 1 < -75 || ball.position.z + 1 > 75 || ball.position.z - 1 < -75)
+        if(speed > 0.0015)
+          speed += -0.0003;
+
+      if(speed < 0.002)
+        ball.material.color = new THREE.Color(0x0000ff);
+
+        console.log(speed);
+
+      if(uu > 1){
+
+        dataPoints = [];
+        fireStart = false;
+        uu = 0;
+        speed = 0.006;
+
+      }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    changePlane();
+    go = 0;
+    change = 0;
+    Targeting();
+    requestAnimationFrame(animate);
+    render();
+
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  changePlane();
-  go = 0;
-  change = 0;
-  Targeting();
-  controls.update();
-  requestAnimationFrame(animate);
-  render();
 
-}
+  function render() {
 
+    renderer.render(scene, camera);
 
-function render() {
+  }
 
-  renderer.render(scene, camera);
-  renderer2.render(scene, camera2);
+  function myRand(min,max){
+    return Math.floor(Math.random()*(max-min+1)+min);
+  }
 
-}
-
-function myRand(min,max){
-  return Math.floor(Math.random()*(max-min+1)+min);
-}
-
-window.focus();
+  window.focus();
 
 </script>
 </body>

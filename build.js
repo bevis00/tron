@@ -1,3 +1,4 @@
+
 function buildTank() {
 
   var tank = new THREE.Object3D();
@@ -11,10 +12,14 @@ function buildTank() {
   return tank;
 
 }
+
 function buildTarget(){
+
   var target = new THREE.Mesh(new THREE.CylinderGeometry(3,3,1.5,35),new THREE.MeshBasicMaterial({
     color: 0xf7ffaa}));
+
   return target;
+
 }
 
 function buildBrick() {
@@ -61,12 +66,11 @@ function buildBrick2() {
   var brick = new THREE.Mesh(new THREE.BoxGeometry(5, 6, 7), material);
 
   return brick;
+
 }
 
-
-
-
 function buildBigBall() {
+
   var ball= new THREE.Mesh(new THREE.SphereGeometry(30,32,32),new THREE.MeshLambertMaterial());
   scene.add(ball);
 
@@ -74,6 +78,7 @@ function buildBigBall() {
 
 
 function buildLight() {
+
   var pointLight1 = new THREE.PointLight( 0xffffff, 1, 150 );
 	pointLight1.position.set( -37.5, 37.5, -37.5 );
 	scene.add( pointLight1 );
@@ -105,8 +110,11 @@ function buildLight() {
 	var sphereSize4 = 10;
 	var pointLightHelper4 = new THREE.PointLightHelper( pointLight4, sphereSize4 );
 	scene.add( pointLightHelper4 );
+
 }
-function bildWall(){
+
+function buildWall(){
+
   brick1 = buildBrick();
   brick2 = buildBrick2();
 
@@ -402,4 +410,5 @@ function bildWall(){
     scene.add(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
 
   }
+
 }
