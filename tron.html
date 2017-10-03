@@ -102,6 +102,7 @@
     for(var i = 0 ; i < 6 ; i++){
       planes[i] = buildPlanes();
       planes[i].name = "plane" + i;
+      planes[i].receiveShadow = true;
       pickables.push(planes[i]);
       scene.add(planes[i]);
     }

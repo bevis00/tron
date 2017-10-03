@@ -7,7 +7,7 @@ function buildPlanes() {
   });
 
   var plane = new THREE.Mesh(new THREE.PlaneGeometry(150, 150, 32, 32), material);
-  plane.receiveShadow = true;
+  
   return plane;
 }
 function buildTank() {
