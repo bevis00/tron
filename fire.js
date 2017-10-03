@@ -51,37 +51,37 @@ function raytest() {
   if (intersects.length > 0) {
 
     //facePX
-    if (intersects[0].object.name === "wallPx") {
+    if (intersects[0].object.name === "plane0") {
 
       var n = new THREE.Vector3(-1, 0, 0);
 
     }
 
-    if (intersects[0].object.name === "wallNx") {
+    if (intersects[0].object.name === "plane1") {
 
       n = new THREE.Vector3(1, 0, 0);
 
     }
 
-    if (intersects[0].object.name === "wallPy") {
+    if (intersects[0].object.name === "plane2") {
 
       n = new THREE.Vector3(0, -1, 0);
 
     }
 
-    if (intersects[0].object.name === "wallNy") {
+    if (intersects[0].object.name === "plane3") {
 
       n = new THREE.Vector3(0, 1, 0);
 
     }
 
-    if (intersects[0].object.name === "wallPz") {
+    if (intersects[0].object.name === "plane4") {
 
       n = new THREE.Vector3(0, 0, -1);
 
     }
 
-    if (intersects[0].object.name === "wallNz") {
+    if (intersects[0].object.name === "plane5") {
 
       n = new THREE.Vector3(0, 0, 1);
 
@@ -99,37 +99,37 @@ function raytest() {
       if (intersectsR.length > 0) {
 
         //facePX
-        if (intersectsR[0].object.name === "wallPx") {
+        if (intersects[0].object.name === "plane0") {
 
-          n = new THREE.Vector3(-1, 0, 0);
+          var n = new THREE.Vector3(-1, 0, 0);
 
         }
 
-        if (intersectsR[0].object.name === "wallNx") {
+        if (intersectsR[0].object.name === "plane1") {
 
           n = new THREE.Vector3(1, 0, 0);
 
         }
 
-        if (intersectsR[0].object.name === "wallPy") {
+        if (intersectsR[0].object.name === "plane2") {
 
           n = new THREE.Vector3(0, -1, 0);
 
         }
 
-        if (intersectsR[0].object.name === "wallNy") {
+        if (intersectsR[0].object.name === "plane3") {
 
           n = new THREE.Vector3(0, 1, 0);
 
         }
 
-        if (intersectsR[0].object.name === "wallPz") {
+        if (intersectsR[0].object.name === "plane4") {
 
           n = new THREE.Vector3(0, 0, -1);
 
         }
 
-        if (intersectsR[0].object.name === "wallNz") {
+        if (intersectsR[0].object.name === "plane5") {
 
           n = new THREE.Vector3(0, 0, 1);
 
@@ -148,37 +148,37 @@ function raytest() {
           if (intersectsR2.length > 0) {
 
             //facePX
-            if (intersectsR2[0].object.name === "wallPx") {
+            if (intersectsR2[0].object.name === "plane0") {
 
               n = new THREE.Vector3(-1, 0, 0);
 
             }
 
-            if (intersectsR2[0].object.name === "wallNx") {
+            if (intersectsR2[0].object.name === "plane1") {
 
               n = new THREE.Vector3(1, 0, 0);
 
             }
 
-            if (intersectsR2[0].object.name === "wallPy") {
+            if (intersectsR2[0].object.name === "plane2") {
 
               n = new THREE.Vector3(0, -1, 0);
 
             }
 
-            if (intersectsR2[0].object.name === "wallNy") {
+            if (intersectsR2[0].object.name === "plane3") {
 
               n = new THREE.Vector3(0, 1, 0);
 
             }
 
-            if (intersectsR2[0].object.name === "wallPz") {
+            if (intersectsR2[0].object.name === "plane4") {
 
               n = new THREE.Vector3(0, 0, -1);
 
             }
 
-            if (intersectsR2[0].object.name === "wallNz") {
+            if (intersectsR2[0].object.name === "plane5") {
 
               n = new THREE.Vector3(0, 0, 1);
 
@@ -196,37 +196,37 @@ function raytest() {
               if (intersectsR3.length > 0) {
 
                 //facePX
-                if (intersectsR3[0].object.name === "wallPx") {
+                if (intersectsR3[0].object.name === "plane0") {
 
                   n = new THREE.Vector3(-1, 0, 0);
 
                 }
 
-                if (intersectsR3[0].object.name === "wallNx") {
+                if (intersectsR3[0].object.name === "plane1") {
 
                   n = new THREE.Vector3(1, 0, 0);
 
                 }
 
-                if (intersectsR3[0].object.name === "wallPy") {
+                if (intersectsR3[0].object.name === "plane2") {
 
                   n = new THREE.Vector3(0, -1, 0);
 
                 }
 
-                if (intersectsR3[0].object.name === "wallNy") {
+                if (intersectsR3[0].object.name === "plane3") {
 
                   n = new THREE.Vector3(0, 1, 0);
 
                 }
 
-                if (intersectsR3[0].object.name === "wallPz") {
+                if (intersectsR3[0].object.name === "plane4") {
 
                   n = new THREE.Vector3(0, 0, -1);
 
                 }
 
-                if (intersectsR3[0].object.name === "wallNz") {
+                if (intersectsR3[0].object.name === "plane5") {
 
                   n = new THREE.Vector3(0, 0, 1);
 
@@ -244,37 +244,37 @@ function raytest() {
                   if (intersectsR4.length > 0) {
 
                     //facePX
-                    if (intersectsR4[0].object.name === "wallPx") {
+                    if (intersectsR4[0].object.name === "plane0") {
 
                       n = new THREE.Vector3(-1, 0, 0);
 
                     }
 
-                    if (intersectsR4[0].object.name === "wallNx") {
+                    if (intersectsR4[0].object.name === "plane1") {
 
                       n = new THREE.Vector3(1, 0, 0);
 
                     }
 
-                    if (intersectsR4[0].object.name === "wallPy") {
+                    if (intersectsR4[0].object.name === "plane2") {
 
                       n = new THREE.Vector3(0, -1, 0);
 
                     }
 
-                    if (intersectsR4[0].object.name === "wallNy") {
+                    if (intersectsR4[0].object.name === "plane3") {
 
                       n = new THREE.Vector3(0, 1, 0);
 
                     }
 
-                    if (intersectsR4[0].object.name === "wallPz") {
+                    if (intersectsR4[0].object.name === "plane4") {
 
                       n = new THREE.Vector3(0, 0, -1);
 
                     }
 
-                    if (intersectsR4[0].object.name === "wallNz") {
+                    if (intersectsR4[0].object.name === "plane5") {
 
                       n = new THREE.Vector3(0, 0, 1);
 

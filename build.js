@@ -1,4 +1,15 @@
 
+function buildPlanes() {
+
+  var material = new THREE.MeshBasicMaterial({
+    side: THREE.BackSide,
+    visible:false
+  });
+
+  var plane = new THREE.Mesh(new THREE.PlaneGeometry(150, 150, 32, 32), material);
+  plane.receiveShadow = true;
+  return plane;
+}
 function buildTank() {
 
   var tank = new THREE.Object3D();
@@ -71,7 +82,9 @@ function buildBrick2() {
 
 function buildBigBall() {
 
-  var ball= new THREE.Mesh(new THREE.SphereGeometry(40,32,32),new THREE.MeshLambertMaterial());
+  var ball= new THREE.Mesh(new THREE.SphereGeometry(40,32,32),new THREE.MeshLambertMaterial({
+    transparent:true,
+    opacity:0.7}));
   ball.name="Breakout";
   scene.add(ball);
   pickables.push(ball);
@@ -85,33 +98,31 @@ function buildLight() {
 	pointLight1.position.set( -37.5, 37.5, -37.5 );
 	scene.add( pointLight1 );
 
-	var sphereSize1 = 10;
-	var pointLightHelper1 = new THREE.PointLightHelper( pointLight1, sphereSize1 );
-	scene.add( pointLightHelper1 );
-
   var pointLight2 = new THREE.PointLight( 0xffffff, 1, 150 );
 	pointLight2.position.set( -37.5, 37.5, 37.5 );
 	scene.add( pointLight2 );
-
-	var sphereSize2 = 10;
-	var pointLightHelper2 = new THREE.PointLightHelper( pointLight2, sphereSize2 );
-	scene.add( pointLightHelper2 );
 
   var pointLight3 = new THREE.PointLight( 0xffffff, 1, 150 );
 	pointLight3.position.set( 37.5, -37.5, -37.5 );
 	scene.add( pointLight3 );
 
-	var sphereSize3 = 10;
-	var pointLightHelper3 = new THREE.PointLightHelper( pointLight3, sphereSize3 );
-	scene.add( pointLightHelper3 );
-
   var pointLight4 = new THREE.PointLight( 0xffffff, 1, 150 );
 	pointLight4.position.set( 37.5, -37.5, 37.5 );
 	scene.add( pointLight4 );
 
-	var sphereSize4 = 10;
-	var pointLightHelper4 = new THREE.PointLightHelper( pointLight4, sphereSize4 );
-	scene.add( pointLightHelper4 );
+  var pointLightMid = new THREE.PointLight (0xffffff, 1, 150);
+  pointLightMid.position.set(0,0,0);
+  pointLightMid.castShadow = true;
+  pointLightMid.shadow.camera.left = -80;
+  pointLightMid.shadow.camera.top = -80;
+  pointLightMid.shadow.camera.right = 80;
+  pointLightMid.shadow.camera.bottom = 80;
+  pointLightMid.shadow.camera.near = 1;
+  pointLightMid.shadow.camera.far = 1000;
+  pointLightMid.shadow.mapSize.width = pointLightMid.shadow.mapSize.height = 1024;
+  scene.add(pointLightMid);
+  pointLightMid.shadow.bias = -.0001
+
 
 }
 
@@ -408,7 +419,7 @@ function buildWall(){
 
   for (i = 0; i < wallPx.length; i++) {
 
-    pickables.push(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
+    //pickables.push(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
     scene.add(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
 
   }

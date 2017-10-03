@@ -45,7 +45,7 @@
   var raycasterR4 = new THREE.Raycaster();
   var raycasterR5 = new THREE.Raycaster();
 
-  
+
   var tank, barrel, turret, ball, head;
   var bigBall;
   var tankP, avatarBody, v, vP = new THREE.Vector3(1, 0, 0);
@@ -59,6 +59,7 @@
   var changeX = 0, changeY = 1, changeZ = 0;
 
   var pickables = [];
+  var planes = [];
   var wallPx = [], wallNx = [], wallPy = [], wallNy = [], wallPz = [], wallNz = [];
   var brick1, brick2;
 
@@ -82,6 +83,9 @@
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x888888);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
     $("#container").append(renderer.domElement);
 
     ////////////////////////////////////////////////
@@ -93,9 +97,30 @@
     camera.position.z = 50;
 
     var grid = new THREE.GridHelper(150, 15, 'red', 'white');
-    //scene.add(grid);
     grid.position.y = -75;
+    /////////////////////////////////
+    for(var i = 0 ; i < 6 ; i++){
+      planes[i] = buildPlanes();
+      planes[i].name = "plane" + i;
+      pickables.push(planes[i]);
+      scene.add(planes[i]);
+    }
+    planes[0].position.set(75, 0, 0);
+    planes[0].rotation.y = Math.PI / 2;
 
+    planes[1].position.set(-75, 0, 0);
+    planes[1].rotation.y = -Math.PI / 2;
+
+    planes[2].position.set(0, 75, 0);
+    planes[2].rotation.x = -Math.PI / 2;
+
+    planes[3].position.set(0, -75, 0)
+    planes[3].rotation.x = Math.PI / 2;
+
+    planes[4].position.set(0, 0, 75);
+
+    planes[5].position.set(0, 0, -75);
+    planes[5].rotation.y = Math.PI;
     //////////////////////////////////////////////////////////////////////////////
 
     var pointLight1 = new THREE.PointLight( 0xffffff, 1, 160 );
@@ -136,7 +161,8 @@
     ////////////////////////////////////////////////////////////////////////
 
     ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshBasicMaterial({
-      color: 0xff0000
+      color: 0xff0000,
+      castShadow:true
     }));
     ball.visible = false;
     scene.add(ball);
@@ -376,7 +402,7 @@
   }
 
   function myRand(min,max){
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return  (Math.random()*(max-min+1)+min);
   }
 
   window.focus();
