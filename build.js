@@ -9,7 +9,9 @@ function buildPlanes() {
   var plane = new THREE.Mesh(new THREE.PlaneGeometry(150, 150, 32, 32), material);
   
   return plane;
+
 }
+
 function buildTank() {
 
   var tank = new THREE.Object3D();
@@ -91,7 +93,6 @@ function buildBigBall() {
 
 }
 
-
 function buildLight() {
 
   var pointLight1 = new THREE.PointLight( 0xffffff, 1, 150 );
@@ -122,7 +123,6 @@ function buildLight() {
   pointLightMid.shadow.mapSize.width = pointLightMid.shadow.mapSize.height = 1024;
   scene.add(pointLightMid);
   pointLightMid.shadow.bias = -.0001
-
 
 }
 
