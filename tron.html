@@ -31,6 +31,7 @@
 <script src="fire.js"></script>
 <script src="changePlane.js"></script>
 <script src="build.js"></script>
+<script src="cubemap.js"></script>
 
 <script>
 
@@ -93,19 +94,27 @@
     scene = new THREE.Scene();
     scene.add(new THREE.AxisHelper(25));
 
+    var cubeMap = loadCubemap();
+    scene.background = cubeMap;
+
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
     camera.position.z = 50;
 
     var grid = new THREE.GridHelper(150, 15, 'red', 'white');
     grid.position.y = -75;
+
     /////////////////////////////////
+
     for(var i = 0 ; i < 6 ; i++){
+
       planes[i] = buildPlanes();
       planes[i].name = "plane" + i;
       planes[i].receiveShadow = true;
       pickables.push(planes[i]);
       scene.add(planes[i]);
+
     }
+
     planes[0].position.set(75, 0, 0);
     planes[0].rotation.y = Math.PI / 2;
 
@@ -122,6 +131,7 @@
 
     planes[5].position.set(0, 0, -75);
     planes[5].rotation.y = Math.PI;
+
     //////////////////////////////////////////////////////////////////////////////
 
     var pointLight1 = new THREE.PointLight( 0xffffff, 1, 160 );
@@ -171,9 +181,12 @@
     buildBigBall();
 
     for(var i = 0 ; i<6 ; i++){
+
       targetarr[i] = buildTarget();
       scene.add(targetarr[i]);
+
     }
+
     targetarr[0].position.set(-55,myRand(-65,65),myRand(-65,65));
     targetarr[0].rotation.y = Math.PI / 2;
     targetarr[1].position.set(55,myRand(-65,65),myRand(-65,65));
@@ -193,10 +206,13 @@
     window.addEventListener('resize', onWindowResize, false);
 
   }
+
   function onWindowResize() {
+
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+
   }
 
 
@@ -278,6 +294,7 @@
     }
 
     if(tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x - 1 <= tank.position.x + 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x + 1 >= tank.position.x - 10 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y - 1 <= tank.position.y + 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y + 1 >= tank.position.y - 1.5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z - 1 <= tank.position.z + 5 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z + 1 >= tank.position.z - 5 && fire === false){
+
       if(ball.visible === true)
         head.material.color = new THREE.Color(0xffff00);
 
@@ -386,6 +403,7 @@
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     changePlane();
     go = 0;
     change = 0;
@@ -403,7 +421,9 @@
   }
 
   function myRand(min,max){
+
     return  (Math.random()*(max-min+1)+min);
+
   }
 
   window.focus();
