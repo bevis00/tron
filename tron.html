@@ -33,6 +33,8 @@
 <script src="build.js"></script>
 <script src="cubemap.js"></script>
 <script src="wheel.js"></script>
+<script src="stats.js"></script>
+
 
 <script type="x-shader/x-fragment" id="fragmentShaderDepth">
     uniform sampler2D texture;
@@ -74,7 +76,7 @@
 
 <script>
 
-  var camera, scene, renderer;
+  var camera, scene, renderer,stats;
 
   var keyboard = new KeyboardState();
 
@@ -270,6 +272,8 @@
     /////////////////////////////////////////////////////////////////////////////
 
     buildWall();
+    stats = new Stats();
+    document.body.appendChild( stats.dom );
 
     document.body.appendChild(renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
@@ -288,7 +292,7 @@
   function animate() {
 
     keyboard.update();
-    raytest(); 
+    raytest();
 
     if (keyboard.pressed("W")) {
 
@@ -494,7 +498,7 @@
 
 
   function render() {
-
+    stats.update();
     renderer.render(scene, camera);
 
   }
