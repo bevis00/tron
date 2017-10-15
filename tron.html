@@ -174,24 +174,7 @@
     planes[5].rotation.y = Math.PI;
 
     //////////////////////////////////////////////////////////////////////////////
-
-    var pointLight1 = new THREE.PointLight( 0xffffff, 1, 160 );
-  	pointLight1.position.set( -37.5, 37.5, -37.5 );
-  	scene.add( pointLight1 );
-
-    var pointLight2 = pointLight1.clone();
-  	pointLight2.position.set( -37.5, 37.5, 37.5 );
-  	scene.add( pointLight2 );
-
-    var pointLight3 = pointLight1.clone();
-  	pointLight3.position.set( 37.5, -37.5, -37.5 );
-  	scene.add( pointLight3 );
-
-    var pointLight4 = pointLight1.clone();
-  	pointLight4.position.set( 37.5, -37.5, 37.5 );
-  	scene.add( pointLight4 );
-
-    //////////////////////////////////////////////////////////////////////////////
+    buildLight();
 
     //wheel
     wheelInit();
@@ -270,7 +253,6 @@
     targetarr[5].position.set(myRand(-65,65),myRand(-65,65),55);
 
     /////////////////////////////////////////////////////////////////////////////
-
     buildWall();
     stats = new Stats();
     document.body.appendChild( stats.dom );
@@ -469,7 +451,6 @@
       if(speed < 0.002)
         ball.material.color = new THREE.Color(0x0000ff);
 
-        console.log(speed);
 
       if(uu > 1){
         console.log(ball.position.distanceTo( new THREE.Vector3(0,0,0) ));
