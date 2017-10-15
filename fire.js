@@ -41,6 +41,27 @@ function makeLaserR() {
 
 }
 
+function makeLaserR2() {
+
+  var laserBase = intersectsR[0].point;
+  var lineGeometry = new THREE.Geometry();
+  var laserEnd = intersectsR2[0].point;
+
+  lineGeometry.vertices.push(laserBase, laserEnd);
+  lineGeometry.computeLineDistances();
+
+  var lineMaterial = new THREE.LineDashedMaterial({
+    color: 0xffffff,
+    dashSize: 10,
+    gapSize: 2
+  });
+
+  var line = new THREE.Line(lineGeometry, lineMaterial);
+
+  return line;
+
+}
+
 function raytest() {
 
   var laserdir = barrel.clone().localToWorld(new THREE.Vector3(0, 1, 0)).sub(barrel.clone().localToWorld(new THREE.Vector3(0, 0, 0)));
