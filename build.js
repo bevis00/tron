@@ -54,7 +54,7 @@ function buildBrick() {
 
 
   var brick = new THREE.Mesh(new THREE.BoxGeometry(10, 6, 7), material);
-
+  brick.receiveShadow = true;
   return brick;
 
 }
@@ -77,7 +77,7 @@ function buildBrick2() {
   var material = new THREE.MeshFaceMaterial(materialArray);
 
   var brick = new THREE.Mesh(new THREE.BoxGeometry(5, 6, 7), material);
-
+  brick.receiveShadow = true;
   return brick;
 
 }
@@ -109,15 +109,9 @@ function buildLight() {
 	pointLight4.position.set( 37.5, -37.5, 37.5 );
 	scene.add( pointLight4 );
 
-  var pointLightMid = new THREE.PointLight (0xffffff, 1, 150);
+  var pointLightMid = new THREE.PointLight (0xffffff, 1, 200);
   pointLightMid.position.set(0,0,0);
   pointLightMid.castShadow = true;
-  pointLightMid.shadow.camera.left = -80;
-  pointLightMid.shadow.camera.top = -80;
-  pointLightMid.shadow.camera.right = 80;
-  pointLightMid.shadow.camera.bottom = 80;
-  pointLightMid.shadow.camera.near = 1;
-  pointLightMid.shadow.camera.far = 1000;
   pointLightMid.shadow.mapSize.width = pointLightMid.shadow.mapSize.height = 1024;
   scene.add(pointLightMid);
   pointLightMid.shadow.bias = -.0001
