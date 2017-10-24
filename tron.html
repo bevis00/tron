@@ -421,22 +421,22 @@
 
       for (var i = 0; i < 362; i++) {
 
-          if (ball.position.z > wallPx[i].position.z - 6 && ball.position.z < wallPx[i].position.z + 6 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4)
+          if (ball.position.z > wallPx[i].position.z - 6 && ball.position.z < wallPx[i].position.z + 6 && ball.position.y > wallPx[i].position.y - 3.6 && ball.position.y < wallPx[i].position.y + 3.6 && ball.position.x > wallPx[i].position.x - 4 && speed > 0.002)
             scene.remove(wallPx[i]);
 
-         if (ball.position.z > wallNx[i].position.z - 6 && ball.position.z < wallNx[i].position.z + 6 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4)
+         if (ball.position.z > wallNx[i].position.z - 6 && ball.position.z < wallNx[i].position.z + 6 && ball.position.y > wallNx[i].position.y - 3.6 && ball.position.y < wallNx[i].position.y + 3.6 && ball.position.x < wallNx[i].position.x + 4 && speed > 0.002)
             scene.remove(wallNx[i]);
 
-        if (ball.position.x > wallPy[i].position.x - 6 && ball.position.x < wallPy[i].position.x + 6 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4)
+        if (ball.position.x > wallPy[i].position.x - 6 && ball.position.x < wallPy[i].position.x + 6 && ball.position.z > wallPy[i].position.z - 3.6 && ball.position.z < wallPy[i].position.z + 3.6 && ball.position.y > wallPy[i].position.y - 4 && speed > 0.002)
             scene.remove(wallPy[i]);
 
-        if (ball.position.x > wallNy[i].position.x - 6 && ball.position.x < wallNy[i].position.x + 6 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4)
+        if (ball.position.x > wallNy[i].position.x - 6 && ball.position.x < wallNy[i].position.x + 6 && ball.position.z > wallNy[i].position.z - 3.6 && ball.position.z < wallNy[i].position.z + 3.6 && ball.position.y < wallNy[i].position.y + 4 && speed > 0.002)
             scene.remove(wallNy[i]);
 
-        if (ball.position.x > wallPz[i].position.x - 6 && ball.position.x < wallPz[i].position.x + 6 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4)
+        if (ball.position.x > wallPz[i].position.x - 6 && ball.position.x < wallPz[i].position.x + 6 && ball.position.y > wallPz[i].position.y - 3.6 && ball.position.y < wallPz[i].position.y + 3.6 && ball.position.z > wallPz[i].position.z - 4 && speed > 0.002)
             scene.remove(wallPz[i]);
 
-        if (ball.position.x > wallNz[i].position.x - 6 && ball.position.x < wallNz[i].position.x + 6 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4)
+        if (ball.position.x > wallNz[i].position.x - 6 && ball.position.x < wallNz[i].position.x + 6 && ball.position.y > wallNz[i].position.y - 3.6 && ball.position.y < wallNz[i].position.y + 3.6 && ball.position.z < wallNz[i].position.z + 4 && speed > 0.002)
             scene.remove(wallNz[i]);
 
       }
