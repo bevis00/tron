@@ -82,16 +82,31 @@ function buildBrick2() {
 
 }
 
+function buildLightBall() {
+
+  ballLight = new THREE.PointLight( 0xff0000, 2, 50 );
+
+  ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshLambertMaterial({
+      color: 0xff0000,
+    }));
+  ball.add(ballLight);
+  scene.add(ball);
+
+}
+
 function buildBigBall() {
 
   bigBall = new THREE.Mesh(new THREE.SphereGeometry(40,32,32), material);
   bigBall.name = "Breakout";
-  scene.add(bigBall);
   pickables.push(bigBall);
+  scene.add(bigBall);
 
 }
 
 function buildLight() {
+
+  var ambLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+  scene.add( ambLight );
 
   var pointLight1 = new THREE.PointLight( 0xffffff, 1, 115 );
 	pointLight1.position.set( -37.5, 37.5, -37.5 );
