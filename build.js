@@ -20,11 +20,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( 75, 74, 74 ),
-    new THREE.Vector3( 75, 74, -74 ),
-    new THREE.Vector3( 75, -74, -74 ),
-    new THREE.Vector3( 75, -74, 74 ),
-    new THREE.Vector3( 75, 74, 74 )
+    new THREE.Vector3( 75, 72, 72 ),
+    new THREE.Vector3( 75, 72, -72 ),
+    new THREE.Vector3( 75, -72, -72 ),
+    new THREE.Vector3( 75, -72, 72 ),
+    new THREE.Vector3( 75, 72, 72 )
   );
 
   var pxLine = new THREE.Line( geometry, material );
@@ -40,11 +40,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -75, 74, 74 ),
-    new THREE.Vector3( -75, 74, -74 ),
-    new THREE.Vector3( -75, -74, -74 ),
-    new THREE.Vector3( -75, -74, 74 ),
-    new THREE.Vector3( -75, 74, 74 )
+    new THREE.Vector3( -75, 72, 72 ),
+    new THREE.Vector3( -75, 72, -72 ),
+    new THREE.Vector3( -75, -72, -72 ),
+    new THREE.Vector3( -75, -72, 72 ),
+    new THREE.Vector3( -75, 72, 72 )
   );
   geometry.computeLineDistances();
 
@@ -59,11 +59,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -74, 75, -74 ),
-    new THREE.Vector3( 74, 75, -74 ),
-    new THREE.Vector3( 74, 75, 74 ),
-    new THREE.Vector3( -74, 75, 74 ),
-    new THREE.Vector3( -74, 75, -74 )
+    new THREE.Vector3( -72, 75, -72 ),
+    new THREE.Vector3( 72, 75, -72 ),
+    new THREE.Vector3( 72, 75, 72 ),
+    new THREE.Vector3( -72, 75, 72 ),
+    new THREE.Vector3( -72, 75, -72 )
   );
 
   var pyLine = new THREE.Line( geometry, material );
@@ -79,11 +79,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -74, -75, -74 ),
-    new THREE.Vector3( 74, -75, -74 ),
-    new THREE.Vector3( 74, -75, 74 ),
-    new THREE.Vector3( -74, -75, 74 ),
-    new THREE.Vector3( -74, -75, -74)
+    new THREE.Vector3( -72, -75, -72 ),
+    new THREE.Vector3( 72, -75, -72 ),
+    new THREE.Vector3( 72, -75, 72 ),
+    new THREE.Vector3( -72, -75, 72 ),
+    new THREE.Vector3( -72, -75, -72)
   );
   geometry.computeLineDistances();
 
@@ -98,11 +98,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -74, 74, 75 ),
-    new THREE.Vector3( 74, 74, 75 ),
-    new THREE.Vector3( 74, -74, 75 ),
-    new THREE.Vector3( -74, -74, 75 ),
-    new THREE.Vector3( -74, 74, 75 )
+    new THREE.Vector3( -72, 72, 75 ),
+    new THREE.Vector3( 72, 72, 75 ),
+    new THREE.Vector3( 72, -72, 75 ),
+    new THREE.Vector3( -72, -72, 75 ),
+    new THREE.Vector3( -72, 72, 75 )
   );
 
   var pzLine = new THREE.Line( geometry, material );
@@ -118,11 +118,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -74, 74, -75 ),
-    new THREE.Vector3( 74, 74, -75 ),
-    new THREE.Vector3( 74, -74, -75 ),
-    new THREE.Vector3( -74, -74, -75 ),
-    new THREE.Vector3( -74, 74, -75 )
+    new THREE.Vector3( -72, 72, -75 ),
+    new THREE.Vector3( 72, 72, -75 ),
+    new THREE.Vector3( 72, -72, -75 ),
+    new THREE.Vector3( -72, -72, -75 ),
+    new THREE.Vector3( -72, 72, -75 )
   );
   geometry.computeLineDistances();
 
