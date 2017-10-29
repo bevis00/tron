@@ -22,7 +22,7 @@
   }
   body {
     overflow: hidden;
-  } 
+  }
 </style>
 </head>
 
@@ -119,7 +119,7 @@
 
   var intersects, intersectsR, intersectsR2, intersectsR3, intersectsR4, intersectsR5;
   var laser, laserR, laserR2;
-  var targetarr = [];
+  var target;
 
   var curve;
   var dataPoints = [];
@@ -298,23 +298,12 @@
     buildLightBall();
     buildBigBall();
 
-    for(var i = 0 ; i<6 ; i++){
-      targetarr[i] = buildTarget();
-      scene.add(targetarr[i]);
-      targetarr[i].castShadow = true;
-    }
-
-    targetarr[0].position.set(-55,myRand(-65,65),myRand(-65,65));
-    targetarr[0].rotation.y = Math.PI / 2;
-    targetarr[1].position.set(55,myRand(-65,65),myRand(-65,65));
-    targetarr[1].rotation.y = -Math.PI / 2;
-    targetarr[2].position.set(myRand(-65,65),-55,myRand(-65,65));
-    targetarr[2].rotation.x = -Math.PI / 2;
-    targetarr[3].position.set(myRand(-65,65),55,myRand(-65,65));
-    targetarr[3].rotation.x = Math.PI / 2;
-    targetarr[4].position.set(myRand(-65,65),myRand(-65,65),-55);
-    targetarr[5].position.set(myRand(-65,65),myRand(-65,65),55);
-
+    target = buildTarget();
+    scene.add(target);
+    target.castShadow = true;
+    do{
+      target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
+    }while(target.position.distanceTo(new THREE.Vector3(0,0,0) < 45 ));
     /////////////////////////////////////////////////////////////////////////////
 
     buildWall();
@@ -564,7 +553,7 @@
     count ++;
 
     bigBall.visible = true;
-*/    
+*/
     stats.update();
     renderer.render(scene, camera);
     renderer2.render(scene2, camera2);
