@@ -29,7 +29,7 @@
 <body>
 
 <div id="info"> Inelastic collision
-<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)
+<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)(target tips: space)
 </div>
 <title>Tron game</title>
 <div id = 'miniMap'></div>
@@ -131,6 +131,8 @@
   var count = 0, cubeCamera1, cubeCamera2, material;
 
   var miniAvatar = new THREE.Object3D();
+  var miniTarget, miniTargetTemp = new THREE.Vector3(), flash = 0;
+  var tipsLine;
 
 
   init();
@@ -280,7 +282,7 @@
     scene.add(tank);
 
     ////////////////////////////////////////////////////////////////////////
-
+    /*
     cubeCamera1 = new THREE.CubeCamera( 1, 1000, 256 );
     cubeCamera1.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
     scene.add( cubeCamera1 );
@@ -288,7 +290,7 @@
     cubeCamera2 = new THREE.CubeCamera( 1, 1000, 256 );
     cubeCamera2.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
     scene.add( cubeCamera2 );
-
+    */
     material = new THREE.MeshPhongMaterial( {
         /*envMap: cubeCamera2.renderTarget.texture*/
     } );
@@ -304,6 +306,13 @@
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
     }while(target.position.distanceTo(new THREE.Vector3(0,0,0) < 45 ));
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    miniTarget = buildMiniTarget();
+    miniTarget.position.copy(target.position);
+    scene2.add(miniTarget);
+
     /////////////////////////////////////////////////////////////////////////////
 
     buildWall();
@@ -339,6 +348,7 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
+      scene2.remove(tipsLine);
 
     }
 
@@ -351,6 +361,7 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
+      scene2.remove(tipsLine);
 
     }
 
@@ -363,6 +374,7 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
+      scene2.remove(tipsLine);
 
     }
 
@@ -409,6 +421,38 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
+
+    }
+
+    if (keyboard.down("space")) {
+
+      miniTargetTemp.copy(miniTarget.localToWorld(new THREE.Vector3(0, 0, 0))); 
+
+      if (changeX === -1 && changeY === 0 && changeZ === 0)
+          miniTargetTemp.x = 75;
+
+      if (changeX === 1 && changeY === 0 && changeZ === 0) 
+          miniTargetTemp.x = -75;
+
+      if (changeX === 0 && changeY === -1 && changeZ === 0)
+          miniTargetTemp.y = 75;
+
+      if (changeX === 0 && changeY === 1 && changeZ === 0)
+          miniTargetTemp.y = -75;
+
+      if (changeX === 0 && changeY === 0 && changeZ === -1)
+          miniTargetTemp.z = 75;
+
+      if (changeX === 0 && changeY === 0 && changeZ === 1)
+          miniTargetTemp.z = -75;
+
+      buildTipsLine()
+
+    }
+
+    if (keyboard.up("space")) {
+
+      scene2.remove(tipsLine);
 
     }
 
@@ -525,6 +569,16 @@
       }
 
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    if ( flash % 8 === 0 ) {
+      miniTarget.material.color = new THREE.Color(0xf49b42);
+    } else {
+        miniTarget.material.color = new THREE.Color(0xff0000);
+    }
+
+    flash++;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

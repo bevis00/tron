@@ -131,6 +131,23 @@ function buildMiniLinePlanes() {
 
 }
 
+function buildTipsLine(){
+
+  var material = new THREE.LineBasicMaterial({
+    color: "red"
+  });
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    miniAvatar.localToWorld(new THREE.Vector3(0, 0, 0)),
+    miniTargetTemp    
+  );
+
+  tipsLine = new THREE.Line( geometry, material );
+  scene2.add(tipsLine);
+
+}
+
 function buildTank() {
 
   var tank = new THREE.Object3D();
@@ -151,6 +168,16 @@ function buildTarget(){
     color: 0xf7ffaa}));
 
   return target;
+
+}
+
+function buildMiniTarget(){
+
+  var miniTarget = new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+    }));
+
+  return miniTarget;
 
 }
 
