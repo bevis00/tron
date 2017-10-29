@@ -120,7 +120,7 @@ function raytest() {
       if (intersectsR.length > 0) {
 
         //facePX
-        if (intersects[0].object.name === "plane0") {
+        if (intersectsR[0].object.name === "plane0") {
 
           var n = new THREE.Vector3(-1, 0, 0);
 
