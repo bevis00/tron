@@ -12,6 +12,125 @@ function buildPlanes() {
 
 }
 
+function buildMiniLinePlanes() {
+
+  var material = new THREE.LineBasicMaterial({
+    color: "red"
+  });
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( 75, 74, 74 ),
+    new THREE.Vector3( 75, 74, -74 ),
+    new THREE.Vector3( 75, -74, -74 ),
+    new THREE.Vector3( 75, -74, 74 ),
+    new THREE.Vector3( 75, 74, 74 )
+  );
+
+  var pxLine = new THREE.Line( geometry, material );
+  scene2.add( pxLine );
+  
+  ////////////////////////////////////////////////////////////////////////
+  
+  var material = new THREE.LineDashedMaterial( {
+    color: "red",
+    dashSize: 10,
+    gapSize: 5
+  } );
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( -75, 74, 74 ),
+    new THREE.Vector3( -75, 74, -74 ),
+    new THREE.Vector3( -75, -74, -74 ),
+    new THREE.Vector3( -75, -74, 74 ),
+    new THREE.Vector3( -75, 74, 74 )
+  );
+  geometry.computeLineDistances();
+
+  var nxLine = new THREE.Line( geometry, material );
+  scene2.add( nxLine );
+
+  ////////////////////////////////////////////////////////////////////////
+  
+  var material = new THREE.LineBasicMaterial({
+    color: 0x14ff00
+  });
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( -74, 75, -74 ),
+    new THREE.Vector3( 74, 75, -74 ),
+    new THREE.Vector3( 74, 75, 74 ),
+    new THREE.Vector3( -74, 75, 74 ),
+    new THREE.Vector3( -74, 75, -74 )
+  );
+
+  var pyLine = new THREE.Line( geometry, material );
+  scene2.add( pyLine );
+  
+  ////////////////////////////////////////////////////////////////////////
+
+  var material = new THREE.LineDashedMaterial( {
+    color: 0x14ff00,
+    dashSize: 10,
+    gapSize: 5
+  } );
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( -74, -75, -74 ),
+    new THREE.Vector3( 74, -75, -74 ),
+    new THREE.Vector3( 74, -75, 74 ),
+    new THREE.Vector3( -74, -75, 74 ),
+    new THREE.Vector3( -74, -75, -74)
+  );
+  geometry.computeLineDistances();
+
+  var nyLine = new THREE.Line( geometry, material );
+  scene2.add( nyLine );
+  
+  ////////////////////////////////////////////////////////////////////////
+  
+  var material = new THREE.LineBasicMaterial({
+    color: "blue"
+  });
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( -74, 74, 75 ),
+    new THREE.Vector3( 74, 74, 75 ),
+    new THREE.Vector3( 74, -74, 75 ),
+    new THREE.Vector3( -74, -74, 75 ),
+    new THREE.Vector3( -74, 74, 75 )
+  );
+
+  var pzLine = new THREE.Line( geometry, material );
+  scene2.add( pzLine );
+  
+  ////////////////////////////////////////////////////////////////////////
+  
+  var material = new THREE.LineDashedMaterial( {
+    color: "blue",
+    dashSize: 10,
+    gapSize: 5
+  } );
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+    new THREE.Vector3( -74, 74, -75 ),
+    new THREE.Vector3( 74, 74, -75 ),
+    new THREE.Vector3( 74, -74, -75 ),
+    new THREE.Vector3( -74, -74, -75 ),
+    new THREE.Vector3( -74, 74, -75 )
+  );
+  geometry.computeLineDistances();
+
+  var nzLine = new THREE.Line( geometry, material );
+  scene2.add( nzLine );
+
+}
+
 function buildTank() {
 
   var tank = new THREE.Object3D();
