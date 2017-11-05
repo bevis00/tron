@@ -20,11 +20,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( 75, 70, 70 ),
-    new THREE.Vector3( 75, 70, -70 ),
-    new THREE.Vector3( 75, -70, -70 ),
-    new THREE.Vector3( 75, -70, 70 ),
-    new THREE.Vector3( 75, 70, 70 )
+    new THREE.Vector3( 75, 72, 72 ),
+    new THREE.Vector3( 75, 72, -72 ),
+    new THREE.Vector3( 75, -72, -72 ),
+    new THREE.Vector3( 75, -72, 72 ),
+    new THREE.Vector3( 75, 72, 72 )
   );
 
   var pxLine = new THREE.Line( geometry, material );
@@ -40,11 +40,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -75, 70, 70 ),
-    new THREE.Vector3( -75, 70, -70 ),
-    new THREE.Vector3( -75, -70, -70 ),
-    new THREE.Vector3( -75, -70, 70 ),
-    new THREE.Vector3( -75, 70, 70 )
+    new THREE.Vector3( -75, 72, 72 ),
+    new THREE.Vector3( -75, 72, -72 ),
+    new THREE.Vector3( -75, -72, -72 ),
+    new THREE.Vector3( -75, -72, 72 ),
+    new THREE.Vector3( -75, 72, 72 )
   );
   geometry.computeLineDistances();
 
@@ -59,11 +59,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -70, 75, -70 ),
-    new THREE.Vector3( 70, 75, -70 ),
-    new THREE.Vector3( 70, 75, 70 ),
-    new THREE.Vector3( -70, 75, 70 ),
-    new THREE.Vector3( -70, 75, -70 )
+    new THREE.Vector3( -72, 75, -72 ),
+    new THREE.Vector3( 72, 75, -72 ),
+    new THREE.Vector3( 72, 75, 72 ),
+    new THREE.Vector3( -72, 75, 72 ),
+    new THREE.Vector3( -72, 75, -72 )
   );
 
   var pyLine = new THREE.Line( geometry, material );
@@ -79,11 +79,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -70, -75, -70 ),
-    new THREE.Vector3( 70, -75, -70 ),
-    new THREE.Vector3( 70, -75, 70 ),
-    new THREE.Vector3( -70, -75, 70 ),
-    new THREE.Vector3( -70, -75, -70)
+    new THREE.Vector3( -72, -75, -72 ),
+    new THREE.Vector3( 72, -75, -72 ),
+    new THREE.Vector3( 72, -75, 72 ),
+    new THREE.Vector3( -72, -75, 72 ),
+    new THREE.Vector3( -72, -75, -72)
   );
   geometry.computeLineDistances();
 
@@ -98,11 +98,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -70, 70, 75 ),
-    new THREE.Vector3( 70, 70, 75 ),
-    new THREE.Vector3( 70, -70, 75 ),
-    new THREE.Vector3( -70, -70, 75 ),
-    new THREE.Vector3( -70, 70, 75 )
+    new THREE.Vector3( -72, 72, 75 ),
+    new THREE.Vector3( 72, 72, 75 ),
+    new THREE.Vector3( 72, -72, 75 ),
+    new THREE.Vector3( -72, -72, 75 ),
+    new THREE.Vector3( -72, 72, 75 )
   );
 
   var pzLine = new THREE.Line( geometry, material );
@@ -118,11 +118,11 @@ function buildMiniLinePlanes() {
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    new THREE.Vector3( -70, 70, -75 ),
-    new THREE.Vector3( 70, 70, -75 ),
-    new THREE.Vector3( 70, -70, -75 ),
-    new THREE.Vector3( -70, -70, -75 ),
-    new THREE.Vector3( -70, 70, -75 )
+    new THREE.Vector3( -72, 72, -75 ),
+    new THREE.Vector3( 72, 72, -75 ),
+    new THREE.Vector3( 72, -72, -75 ),
+    new THREE.Vector3( -72, -72, -75 ),
+    new THREE.Vector3( -72, 72, -75 )
   );
   geometry.computeLineDistances();
 
@@ -131,7 +131,7 @@ function buildMiniLinePlanes() {
 
 }
 
-function buildHintLine(){
+function buildTipsLine(){
 
   var material = new THREE.LineBasicMaterial({
     color: "red"
@@ -139,12 +139,12 @@ function buildHintLine(){
 
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
-    head.localToWorld(new THREE.Vector3(0, 0, 0)),
-    targetTemp    
+    miniAvatar.localToWorld(new THREE.Vector3(0, 0, 0)),
+    miniTargetTemp    
   );
 
-  hintLine = new THREE.Line( geometry, material );
-  scene.add(hintLine);
+  tipsLine = new THREE.Line( geometry, material );
+  scene2.add(tipsLine);
 
 }
 
@@ -244,7 +244,6 @@ function buildBigBall() {
 
   bigBall = new THREE.Mesh(new THREE.SphereGeometry(40,32,32), material);
   bigBall.name = "Breakout";
-  ball.visible = false;
   pickables.push(bigBall);
   scene.add(bigBall);
 
@@ -252,7 +251,7 @@ function buildBigBall() {
 
 function buildLight() {
 
-  var ambLight = new THREE.AmbientLight( 0x303030 ); // soft white light
+  var ambLight = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( ambLight );
 
   var pointLight1 = new THREE.PointLight( 0xffffff, 1, 115 );
