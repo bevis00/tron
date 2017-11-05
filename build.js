@@ -230,7 +230,7 @@ function buildBrick2() {
 
 function buildLightBall() {
 
-  ballLight = new THREE.PointLight( 0xff0000, 2, 50 );
+  ballLight = new THREE.PointLight( 0xff0000, 5, 50 );
 
   ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshLambertMaterial({
       color: 0xff0000,
