@@ -6,7 +6,7 @@ function buildPlanes() {
     visible:false
   });
 
-  var plane = new THREE.Mesh(new THREE.PlaneGeometry(150, 150, 32, 32), material);
+  var plane = new THREE.Mesh(new THREE.PlaneGeometry(600, 600, 32, 32), material);
 
   return plane;
 
@@ -573,7 +573,7 @@ function buildWall(){
 
   for (i = 0; i < wallPx.length; i++) {
 
-    //pickables.push(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
+    pickables.push(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
     scene.add(wallPx[i], wallNx[i], wallPy[i], wallNy[i], wallPz[i], wallNz[i]);
 
   }
