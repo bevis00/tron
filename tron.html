@@ -46,6 +46,22 @@
 <script src="wheel.js"></script>
 <script src="stats.js"></script>
 
+<audio id="DiscWars" autoplay loop style="display:none">
+<source src="sounds/DiscWars.mp3" type='audio/mpeg'>
+</audio>
+
+<audio id="fireSound" style="display:none">
+<source src="sounds/fire.mp3" type='audio/mpeg'>
+</audio>
+
+<audio id="pickSound" style="display:none">
+<source src="sounds/pick.mp3" type='audio/mpeg'>
+</audio>
+
+<audio id="flySound" style="display:none">
+<source src="sounds/fly.mp3" type='audio/mpeg'>
+</audio>
+
 
 <script type="x-shader/x-fragment" id="fragmentShaderDepth">
     uniform sampler2D texture;
@@ -134,12 +150,18 @@
   var miniTarget, targetTemp = new THREE.Vector3(), flash = 0, miniBall;
   var hintLine, turn = false;
   var slow = false;
+  var fireSound, pickSound, flySound, DiscWars;
 
 
   init();
   animate();
 
   function init() {
+
+    DiscWars = document.getElementById ('DiscWars');
+    fireSound = document.getElementById ('fireSound');
+    pickSound = document.getElementById ('pickSound');
+    flySound = document.getElementById ('flySound');
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -487,6 +509,7 @@
         ball.visible = false;
         miniBall.visible = false;
         fire = true;
+        pickSound.play();
 
       }
 
@@ -509,6 +532,7 @@
         speed = 0.006;
         ball.material.color = new THREE.Color(0xff0000);
         ballLight.color = new THREE.Color(0xff0000);
+        fireSound.play();
 
         miniBall.position.copy(ball.position);
         miniBall.visible = true;
@@ -520,6 +544,7 @@
     if(fireStart){
 
       uu += speed;
+      flySound.play();
 
       if(uu <= 1)
         ball.position.copy(curve.getPointAt (uu));
