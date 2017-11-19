@@ -29,9 +29,9 @@ function buildMiniLinePlanes() {
 
   var pxLine = new THREE.Line( geometry, material );
   scene2.add( pxLine );
-
+  
   ////////////////////////////////////////////////////////////////////////
-
+  
   var material = new THREE.LineDashedMaterial( {
     color: "red",
     dashSize: 10,
@@ -52,7 +52,7 @@ function buildMiniLinePlanes() {
   scene2.add( nxLine );
 
   ////////////////////////////////////////////////////////////////////////
-
+  
   var material = new THREE.LineBasicMaterial({
     color: 0x14ff00
   });
@@ -68,7 +68,7 @@ function buildMiniLinePlanes() {
 
   var pyLine = new THREE.Line( geometry, material );
   scene2.add( pyLine );
-
+  
   ////////////////////////////////////////////////////////////////////////
 
   var material = new THREE.LineDashedMaterial( {
@@ -89,9 +89,9 @@ function buildMiniLinePlanes() {
 
   var nyLine = new THREE.Line( geometry, material );
   scene2.add( nyLine );
-
+  
   ////////////////////////////////////////////////////////////////////////
-
+  
   var material = new THREE.LineBasicMaterial({
     color: "blue"
   });
@@ -107,9 +107,9 @@ function buildMiniLinePlanes() {
 
   var pzLine = new THREE.Line( geometry, material );
   scene2.add( pzLine );
-
+  
   ////////////////////////////////////////////////////////////////////////
-
+  
   var material = new THREE.LineDashedMaterial( {
     color: "blue",
     dashSize: 10,
@@ -140,7 +140,7 @@ function buildHintLine(){
   var geometry = new THREE.Geometry();
   geometry.vertices.push(
     head.localToWorld(new THREE.Vector3(0, 0, 0)),
-    targetTemp
+    targetTemp    
   );
 
   hintLine = new THREE.Line( geometry, material );
