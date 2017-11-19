@@ -304,10 +304,10 @@
     target = buildTarget();
     scene.add(target);
     target.castShadow = true;
-
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
-    }while(target.position.distanceTo(new THREE.Vector3(0,0,0) < 45 ));
+      target.rotation.x=myRand(0,3);
+    }while(target.position.distanceTo(new THREE.Vector3(0,0,0))< 47 );
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -346,10 +346,10 @@
   function blink() {
 
     turn = !turn;
-      
-    if(turn) 
+
+    if(turn)
       miniTarget.material.color = new THREE.Color(0xff0000);
-    else 
+    else
       miniTarget.material.color = new THREE.Color(0xf49b42);
 
   }
@@ -447,12 +447,12 @@
 
     if (keyboard.down("space")) {
 
-      targetTemp.copy(target.localToWorld(new THREE.Vector3(0, 0, 0))); 
+      targetTemp.copy(target.localToWorld(new THREE.Vector3(0, 0, 0)));
 
       if (changeX === -1 && changeY === 0 && changeZ === 0)
           targetTemp.x = 57;
 
-      if (changeX === 1 && changeY === 0 && changeZ === 0) 
+      if (changeX === 1 && changeY === 0 && changeZ === 0)
           targetTemp.x = -57;
 
       if (changeX === 0 && changeY === -1 && changeZ === 0)
@@ -692,9 +692,9 @@
       if(uu > 1){
 
         if(ball.position.distanceTo( new THREE.Vector3(0,0,0) ) < 41  && ball.position.distanceTo( new THREE.Vector3() ) > 39){
-          
+
           var face = Math.floor(Math.random()*6);
-          
+
           if(face === 0){
 
           do{
