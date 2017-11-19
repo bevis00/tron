@@ -507,8 +507,10 @@
       if (keyboard.down("O")) {
 
         ball.visible = false;
+        ball.position.set(0, 0, 0);
         miniBall.visible = false;
         fire = true;
+        fireStart = false;
         pickSound.play();
 
       }
