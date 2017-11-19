@@ -372,10 +372,9 @@ function Targeting(){
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
       target.rotation.x=myRand(0,3);
-    }while(target.position.distanceTo(new THREE.Vector3(0,0,0) < 47 ));
-    
-  }
+    }while(target.position.distanceTo(new THREE.Vector3(0,0,0))< 47 );
 
+  }
   miniTarget.position.copy(target.position);
 
 }
