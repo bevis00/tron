@@ -131,7 +131,7 @@
   var count = 0, cubeCamera1, cubeCamera2, material;
 
   var miniAvatar = new THREE.Object3D();
-  var miniTarget, targetTemp = new THREE.Vector3(), flash = 0;
+  var miniTarget, targetTemp = new THREE.Vector3(), flash = 0, miniBall;
   var hintLine, turn = false;
   var slow = false;
 
@@ -317,6 +317,13 @@
 
     /////////////////////////////////////////////////////////////////////////////
 
+    miniBall = buildMiniBall();
+    miniBall.position.copy(ball);
+    miniBall.visible = false;
+    scene2.add(miniBall);
+
+    /////////////////////////////////////////////////////////////////////////////
+
     buildWall();
 
     stats = new Stats();
@@ -478,6 +485,7 @@
       if (keyboard.down("O")) {
 
         ball.visible = false;
+        miniBall.visible = false;
         fire = true;
 
       }
@@ -501,6 +509,9 @@
         speed = 0.006;
         ball.material.color = new THREE.Color(0xff0000);
         ballLight.color = new THREE.Color(0xff0000);
+
+        miniBall.position.copy(ball.position);
+        miniBall.visible = true;
 
       }
 
@@ -767,6 +778,7 @@
 
     }
 
+    miniBall.position.copy(ball.position);
     changePlane();
     go = 0;
     change = 0;

@@ -165,7 +165,8 @@ function buildTank() {
 function buildTarget(){
 
   var target = new THREE.Mesh(new THREE.CylinderGeometry(3,3,1.5,35),new THREE.MeshBasicMaterial({
-    color: 0xf7ffaa}));
+    color: 0xf7ffaa
+  }));
 
   return target;
 
@@ -173,8 +174,8 @@ function buildTarget(){
 
 function buildMiniTarget(){
 
-  var miniTarget = new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+  var miniTarget = new THREE.Mesh(new THREE.SphereGeometry(10), new THREE.MeshBasicMaterial({
+      color: 0xff0000
     }));
 
   return miniTarget;
@@ -233,8 +234,8 @@ function buildLightBall() {
   ballLight = new THREE.PointLight( 0xff0000, 5, 50 );
 
   ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshLambertMaterial({
-      color: 0xff0000,
-    }));
+      color: 0xff0000
+  }));
   ball.add(ballLight);
   scene.add(ball);
 
@@ -247,6 +248,16 @@ function buildBigBall() {
   ball.visible = false;
   pickables.push(bigBall);
   scene.add(bigBall);
+
+}
+
+function buildMiniBall(){
+
+  var miniBall = new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshBasicMaterial({
+      color: 0x0000ff
+  }));
+
+  return miniBall;
 
 }
 
