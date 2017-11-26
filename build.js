@@ -231,7 +231,7 @@ function buildBrick2() {
 
 function buildLightBall() {
 
-  ballLight = new THREE.PointLight( 0xff0000, 5, 50 );
+  ballLight = new THREE.PointLight( 0xff0000, 7, 70 );
 
   ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshLambertMaterial({
       color: 0xff0000
@@ -293,14 +293,26 @@ function buildLight() {
 
 function buildWall(){
 
-  brick1 = buildBrick();
-  brick2 = buildBrick2();
+  brickX1 = buildBrick();
+  brickX1.material[4].color = new THREE.Color(0xefacac);
+  brickX2 = buildBrick2();
+  brickX2.material[4].color = new THREE.Color(0xefacac);
+
+  brickY1 = buildBrick();
+  brickY1.material[4].color = new THREE.Color(0xacefad);
+  brickY2 = buildBrick2();
+  brickY2.material[4].color = new THREE.Color(0xacefad);
+
+  brickZ1 = buildBrick();
+  brickZ1.material[4].color = new THREE.Color(0xaeacef);
+  brickZ2 = buildBrick2();
+  brickZ2.material[4].color = new THREE.Color(0xaeacef);
 
   for(var i = 0; i < 362; i++)
-    wallPx[i] = brick1.clone();
+    wallPx[i] = brickX1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallPx[i] = brick2.clone();
+    wallPx[i] = brickX2.clone();
 
   for (var i = 0; i < 388; i++) {
 
@@ -344,10 +356,10 @@ function buildWall(){
   /////////////////////////////////////////////////////////////////////////////
 
   for(var i = 0; i < 362; i++)
-    wallNx[i] = brick1.clone();
+    wallNx[i] = brickX1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallNx[i] = brick2.clone();
+    wallNx[i] = brickX2.clone();
 
   for (var i = 0; i < 388; i++) {
 
@@ -392,10 +404,10 @@ function buildWall(){
   /////////////////////////////////////////////////////////////////////////////
 
   for(var i = 0; i < 362; i++)
-    wallPy[i] = brick1.clone();
+    wallPy[i] = brickY1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallPy[i] = brick2.clone();
+    wallPy[i] = brickY2.clone();
 
   for (var i = 0; i < 388; i++) {
 
@@ -440,10 +452,10 @@ function buildWall(){
   /////////////////////////////////////////////////////////////////////////////
 
   for(var i = 0; i < 362; i++)
-    wallNy[i] = brick1.clone();
+    wallNy[i] = brickY1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallNy[i] = brick2.clone();
+    wallNy[i] = brickY2.clone();
 
   for (var i = 0; i < 388; i++) {
 
@@ -488,10 +500,10 @@ function buildWall(){
   /////////////////////////////////////////////////////////////////////////////
 
   for(var i = 0; i < 362; i++)
-    wallPz[i] = brick1.clone();
+    wallPz[i] = brickZ1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallPz[i] = brick2.clone();
+    wallPz[i] = brickZ2.clone();
 
   for (var i = 0; i < 388; i++) {
 
@@ -536,10 +548,10 @@ function buildWall(){
   /////////////////////////////////////////////////////////////////////////////
 
   for(var i = 0; i < 362; i++)
-    wallNz[i] = brick1.clone();
+    wallNz[i] = brickZ1.clone();
 
   for(var i = 362; i < 388; i++)
-    wallNz[i] = brick2.clone();
+    wallNz[i] = brickZ2.clone();
 
   for (var i = 0; i < 388; i++) {
 

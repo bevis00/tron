@@ -45,11 +45,11 @@
 <script src="cubemap.js"></script>
 <script src="wheel.js"></script>
 <script src="stats.js"></script>
-
+<!--
 <audio id="DiscWars" autoplay loop style="display:none">
 <source src="sounds/DiscWars.mp3" type='audio/mpeg'>
 </audio>
-
+-->
 <audio id="fireSound" style="display:none">
 <source src="sounds/fire.mp3" type='audio/mpeg'>
 </audio>
@@ -131,7 +131,7 @@
   var pickables = [];
   var planes = [];
   var wallPx = [], wallNx = [], wallPy = [], wallNy = [], wallPz = [], wallNz = [];
-  var brick1, brick2;
+  var brickX1, brickX2;
 
   var intersects, intersectsR, intersectsR2, intersectsR3, intersectsR4, intersectsR5;
   var laser, laserR, laserR2;
@@ -151,6 +151,7 @@
   var hintLine, turn = false;
   var slow = false;
   var fireSound, pickSound, flySound, DiscWars;
+  var spotLight;
 
 
   init();
@@ -158,7 +159,7 @@
 
   function init() {
 
-    DiscWars = document.getElementById ('DiscWars');
+    //DiscWars = document.getElementById ('DiscWars');
     fireSound = document.getElementById ('fireSound');
     pickSound = document.getElementById ('pickSound');
     flySound = document.getElementById ('flySound');
@@ -277,7 +278,7 @@
     barrel.position.x = 5;
     barrel.rotation.z = -Math.PI/2;
 
-    head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0x664c14}));
+    head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshLambertMaterial({color: 0x664c14}));
 
     turret.add(head, barrel);
     turret.position.y = 10;
@@ -343,6 +344,12 @@
     miniBall.position.copy(ball);
     miniBall.visible = false;
     scene2.add(miniBall);
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    spotLight = new THREE.SpotLight( 0xffffff, 20, 54, 0.08 );
+    spotLight.target = head;
+    scene.add( spotLight );
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -461,7 +468,8 @@
     }
 
     if (keyboard.up("L")) {
-
+console.log(wallPx[0]);
+console.log(wallPy[0]);
       turret.remove(laser);
       scene.remove(laserR, laserR2);
 
@@ -807,10 +815,12 @@
 
     miniBall.position.copy(ball.position);
     changePlane();
+    spotLight.position.set( tank.localToWorld(new THREE.Vector3(-45, 7, 0)).x, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).y, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).z );
     go = 0;
     change = 0;
     slow = false;
     Targeting();
+    
     requestAnimationFrame(animate);
     render();
 
