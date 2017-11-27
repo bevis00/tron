@@ -29,7 +29,7 @@
 <body>
 
 <div id="info"> Inelastic collision
-<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)(motion hint: space)
+<br>(fire: J)(aim: L)(I and K control to aim)(pick up ball: O)
 </div>
 <title>Tron game</title>
 <div id = 'miniMap'></div>
@@ -148,9 +148,10 @@
 
   var miniAvatar = new THREE.Object3D();
   var miniTarget, targetTemp = new THREE.Vector3(), flash = 0, miniBall;
-  var hintLine, turn = false;
+  var motionHint = new THREE.Object3D(), turn = false;
   var slow = false;
   var fireSound, pickSound, flySound, DiscWars;
+  var spotLight;
 
 
   init();
@@ -277,7 +278,7 @@
     barrel.position.x = 5;
     barrel.rotation.z = -Math.PI/2;
 
-    head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0x664c14}));
+    head = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshLambertMaterial({color: 0x664c14}));
 
     turret.add(head, barrel);
     turret.position.y = 10;
@@ -346,6 +347,33 @@
 
     /////////////////////////////////////////////////////////////////////////////
 
+    spotLight = new THREE.SpotLight( 0xffffff, 20, 54, 0.08 );
+    spotLight.target = head;
+    scene.add( spotLight );
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    var texture = new THREE.TextureLoader();
+    texture.setCrossOrigin('');
+
+    var hint = new THREE.Mesh(new THREE.PlaneGeometry(41.15, 41.3), new THREE.MeshBasicMaterial({
+      map: texture.load('https://i.imgur.com/TUgFXJD.png'),
+      transparent: true
+    }));
+
+    //hint.rotation.x = -Math.PI/2;
+
+    hint.rotation.order = 'YXZ';
+    hint.rotation.y = -Math.PI/2;
+    hint.rotation.x = -Math.PI/2;
+     
+    hint.position.set(28, -7.5, 0);
+
+    motionHint.add(hint);
+    tank.add(motionHint);
+
+    /////////////////////////////////////////////////////////////////////////////
+
     buildWall();
 
     stats = new Stats();
@@ -391,7 +419,6 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
-      scene.remove(hintLine);
 
     }
 
@@ -404,7 +431,6 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
-      scene.remove(hintLine);
 
     }
 
@@ -417,7 +443,6 @@
 
       turret.remove(laser);
       scene.remove(laserR, laserR2);
-      scene.remove(hintLine);
 
     }
 
@@ -467,38 +492,6 @@
 
     }
 
-    if (keyboard.down("space")) {
-
-      targetTemp.copy(target.localToWorld(new THREE.Vector3(0, 0, 0)));
-
-      if (changeX === -1 && changeY === 0 && changeZ === 0)
-          targetTemp.x = 57;
-
-      if (changeX === 1 && changeY === 0 && changeZ === 0)
-          targetTemp.x = -57;
-
-      if (changeX === 0 && changeY === -1 && changeZ === 0)
-          targetTemp.y = 57;
-
-      if (changeX === 0 && changeY === 1 && changeZ === 0)
-          targetTemp.y = -57;
-
-      if (changeX === 0 && changeY === 0 && changeZ === -1)
-          targetTemp.z = 57;
-
-      if (changeX === 0 && changeY === 0 && changeZ === 1)
-          targetTemp.z = -57;
-
-      buildHintLine()
-
-    }
-
-    if (keyboard.up("space")) {
-
-      scene.remove(hintLine);
-
-    }
-
     if(tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x - 1 <= tank.position.x + 9 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x + 1 >= tank.position.x - 9 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y - 1 <= tank.position.y + 9 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).y + 1 >= tank.position.y - 9 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z - 1 <= tank.position.z + 6.7 && tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z + 1 >= tank.position.z - 6.7 && fire === false){
 
       if(ball.visible === true)
@@ -530,6 +523,7 @@
         fire = false;
 
         ball.material.color = new THREE.Color(0xff0000);
+        ball.material.emissive = new THREE.Color(0xff0000);
         ballLight.color = new THREE.Color(0xff0000);
         fireSound.play();
 
@@ -709,7 +703,9 @@
 
 
       if(vel.length() < 16){
+
         ball.material.color = new THREE.Color(0x0000ff);
+        ball.material.emissive = new THREE.Color(0x0000ff);
         ballLight.color = new THREE.Color(0x0000ff);
 
       }
@@ -718,6 +714,7 @@
 
         vel = new THREE.Vector3();
         ball.material.color = new THREE.Color(0x0000ff);
+        ball.material.emissive = new THREE.Color(0x0000ff);
         ballLight.color = new THREE.Color(0x0000ff);
         fireStart = false;
         randBallPos()
@@ -727,9 +724,9 @@
       if(vel.length() < 10){
         vel = new THREE.Vector3(0,0,0);
 
-        if(ballPos.distanceTo( new THREE.Vector3(0,0,0) ) < 41  && ballPos.distanceTo( new THREE.Vector3(0,0,0) ) > 39){
-          randBallPos();
-        }
+      if(ballPos.distanceTo( new THREE.Vector3(0,0,0) ) < 41  && ballPos.distanceTo( new THREE.Vector3(0,0,0) ) > 39){
+        randBallPos();
+      }
 
         fireStart = false;
 
@@ -741,9 +738,10 @@
     // pos = pos + vel * dt
     ballPos.add(vel.clone().multiplyScalar(dt));
     ball.position.set(ballPos.x,ballPos.y,ballPos.z);
-
+    
     miniBall.position.copy(ball.position);
     changePlane();
+    spotLight.position.set( tank.localToWorld(new THREE.Vector3(-45, 7, 0)).x, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).y, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).z );
     go = 0;
     change = 0;
     Targeting();

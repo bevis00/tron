@@ -1,4 +1,5 @@
 function randBallPos(){
+
     var face = Math.floor(Math.random()*6);
 
     if(face === 0){
@@ -72,4 +73,5 @@ function randBallPos(){
     ballPos.set(wallNz[face].position.x, wallNz[face].position.y, wallNz[face].position.z + 4.4);
 
   }
+  
 }

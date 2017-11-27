@@ -131,23 +131,6 @@ function buildMiniLinePlanes() {
 
 }
 
-function buildHintLine(){
-
-  var material = new THREE.LineBasicMaterial({
-    color: "red"
-  });
-
-  var geometry = new THREE.Geometry();
-  geometry.vertices.push(
-    head.localToWorld(new THREE.Vector3(0, 0, 0)),
-    targetTemp    
-  );
-
-  hintLine = new THREE.Line( geometry, material );
-  scene.add(hintLine);
-
-}
-
 function buildTank() {
 
   var tank = new THREE.Object3D();
@@ -234,7 +217,8 @@ function buildLightBall() {
   ballLight = new THREE.PointLight( 0xff0000, 7, 70 );
 
   ball = new THREE.Mesh(new THREE.SphereGeometry(0.9), new THREE.MeshLambertMaterial({
-      color: 0xff0000
+      color: 0xff0000,
+      emissive: 0xff0000
   }));
   ball.add(ballLight);
   scene.add(ball);
