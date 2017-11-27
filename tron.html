@@ -504,6 +504,7 @@
         miniBall.visible = false;
         fire = true;
         fireStart = false;
+        flySound.load();
         pickSound.play();
 
       }
@@ -515,6 +516,7 @@
     if(fire){
 
       if (keyboard.down("J")) {
+        
         ballPos=barrel.clone().localToWorld(new THREE.Vector3(0,0,0));
         ball.castShadow=true;
         ball.visible = true;
@@ -660,14 +662,16 @@
 
       }
 
-      if( ballPos.distanceTo( new THREE.Vector3(0,0,0)) < 42 ){
+      if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 42 && vel.length() > 10){
+
         var n = new THREE.Vector3();
-        n=ballPos.clone().sub(new THREE.Vector3(0,0,0)).normalize();
-        console.log(n);
+        n = (ballPos.clone().sub(new THREE.Vector3(0,0,0))).normalize();
         reflactVel(n);
+
       }
 
-      if(refalctionDec  && vel.length() > 10 ){
+      if( refalctionDec && vel.length() > 10 ){
+
         if(ballPos.x >　75){
           ballPos.x=74;
           var n = new THREE.Vector3(-1, 0, 0);
@@ -717,18 +721,20 @@
         ball.material.emissive = new THREE.Color(0x0000ff);
         ballLight.color = new THREE.Color(0x0000ff);
         fireStart = false;
+        flySound.load();
         randBallPos()
 
       }
 
       if(vel.length() < 10){
+
         vel = new THREE.Vector3(0,0,0);
 
-      if(ballPos.distanceTo( new THREE.Vector3(0,0,0) ) < 41  && ballPos.distanceTo( new THREE.Vector3(0,0,0) ) > 39){
-        randBallPos();
-      }
+        if( ball.position.distanceTo( new THREE.Vector3(0,0,0) ) < 42  && ball.position.distanceTo( new THREE.Vector3(0,0,0) ) > 39 )
+          randBallPos();
 
         fireStart = false;
+        flySound.load();
 
       }
 

@@ -30,7 +30,7 @@ function makeLaserR() {
   lineGeometry.computeLineDistances();
 
   var lineMaterial = new THREE.LineDashedMaterial({
-    color: 0xffffff,
+    color: 0xffff00,
     dashSize: 10,
     gapSize: 2
   });
@@ -51,7 +51,7 @@ function makeLaserR2() {
   lineGeometry.computeLineDistances();
 
   var lineMaterial = new THREE.LineDashedMaterial({
-    color: 0xffffff,
+    color: 0xffff00,
     dashSize: 10,
     gapSize: 2
   });

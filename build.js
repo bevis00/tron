@@ -231,7 +231,10 @@ function buildBigBall() {
   bigBall.name = "Breakout";
   ball.visible = false;
   pickables.push(bigBall);
-  scene.add(bigBall);
+
+  var wireframeBall = new THREE.Mesh(new THREE.SphereGeometry(40.7,24,12), new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, transparent: true } ));
+
+  scene.add(bigBall, wireframeBall);
 
 }
 
