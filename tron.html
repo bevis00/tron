@@ -148,7 +148,7 @@
 
   var miniAvatar = new THREE.Object3D();
   var miniTarget, targetTemp = new THREE.Vector3(), flash = 0, miniBall;
-  var motionHint = new THREE.Object3D(), turn = false;
+  var motionHint = new THREE.Object3D(), motionHintBall = new THREE.Object3D(), turn = false;
   var slow = false;
   var fireSound, pickSound, flySound, DiscWars;
   var spotLight;
@@ -357,21 +357,31 @@
     var texture = new THREE.TextureLoader();
     texture.setCrossOrigin('');
 
-    var hint = new THREE.Mesh(new THREE.PlaneGeometry(41.15, 41.3), new THREE.MeshBasicMaterial({
+    var hint = new THREE.Mesh(new THREE.PlaneGeometry(20.575, 20.65), new THREE.MeshBasicMaterial({
       map: texture.load('https://i.imgur.com/TUgFXJD.png'),
       transparent: true
     }));
 
-    //hint.rotation.x = -Math.PI/2;
-
     hint.rotation.order = 'YXZ';
     hint.rotation.y = -Math.PI/2;
     hint.rotation.x = -Math.PI/2;
-     
-    hint.position.set(28, -7.5, 0);
-
+    hint.position.set(18, -7.9, 0);
     motionHint.add(hint);
-    tank.add(motionHint);
+
+
+    var hintBall = new THREE.Mesh(new THREE.PlaneGeometry(11.5, 19.6), new THREE.MeshBasicMaterial({
+      map: texture.load('https://i.imgur.com/4z0xiJl.png'),
+      transparent: true
+    }));
+
+    hintBall.rotation.order = 'YXZ';
+    hintBall.rotation.y = -Math.PI/2;
+    hintBall.rotation.x = -Math.PI/2;
+    hintBall.position.set(19, -7.8, 0);
+    motionHintBall.add(hintBall);
+    motionHintBall.visible = false;
+    
+    tank.add(motionHint, motionHintBall);
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -501,6 +511,7 @@
       if (keyboard.down("O")) {
 
         ball.visible = false;
+        motionHintBall.visible = false;
         ball.position.set(0, 0, 0);
         miniBall.visible = false;
         fire = true;
@@ -723,7 +734,8 @@
 
       if(ballPos.x > 250 || ballPos.y > 250 || ballPos.z > 250 || ballPos.x < -250 || ballPos.y < -250 || ballPos.z < -250){
 
-        vel = new THREE.Vector3();
+        vel = new THREE.Vector3(0, 0, 0);
+        motionHintBall.visible = true;
         ball.material.color = new THREE.Color(0x0000ff);
         ball.material.emissive = new THREE.Color(0x0000ff);
         ballLight.color = new THREE.Color(0x0000ff);
@@ -736,7 +748,7 @@
       if(vel.length() < 10){
 
         vel = new THREE.Vector3(0,0,0);
-
+        motionHintBall.visible = true;
         if( ball.position.distanceTo( new THREE.Vector3(0,0,0) ) < 42  && ball.position.distanceTo( new THREE.Vector3(0,0,0) ) > 39 )
           randBallPos();
 
