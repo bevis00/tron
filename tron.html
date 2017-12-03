@@ -46,11 +46,11 @@
 <script src="wheel.js"></script>
 <script src="stats.js"></script>
 <script src="ballRand.js"></script>
-
+<!--
 <audio id="DiscWars" autoplay loop style="display:none">
 <source src="sounds/DiscWars.mp3" type='audio/mpeg'>
 </audio>
-
+-->
 <audio id="fireSound" style="display:none">
 <source src="sounds/fire.mp3" type='audio/mpeg'>
 </audio>
@@ -509,9 +509,9 @@
 
       }
 
-      }
-      else
-        head.material.color = new THREE.Color(0x664c14);
+    }
+    else
+      head.material.color = new THREE.Color(0x664c14);
 
     if(fire){
 
@@ -662,14 +662,6 @@
 
       }
 
-      if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 42 && vel.length() > 10){
-
-        var n = new THREE.Vector3();
-        n = (ballPos.clone().sub(new THREE.Vector3(0,0,0))).normalize();
-        reflactVel(n);
-
-      }
-
       if( refalctionDec && vel.length() > 10 ){
 
         if(ballPos.x >　75){
@@ -705,6 +697,13 @@
 
       }
 
+      if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 42 && vel.length() > 10){
+
+        var n = new THREE.Vector3();
+        n = (ballPos.clone().sub(new THREE.Vector3(0,0,0))).normalize();
+        reflactVel(n);
+
+      }
 
       if(vel.length() < 16){
 
