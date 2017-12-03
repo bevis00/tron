@@ -148,8 +148,25 @@ function buildTank() {
 function buildTarget(){
 
   var target = new THREE.Mesh(new THREE.CylinderGeometry(3,3,1.5,35),new THREE.MeshBasicMaterial({
-    color: 0xf7ffaa
+    color: 0x888888
   }));
+
+  var texture = new THREE.TextureLoader();
+  texture.setCrossOrigin('');
+
+  var targetFace1 = new THREE.Mesh(new THREE.PlaneGeometry(6,6,64,64),new THREE.MeshLambertMaterial({map: texture.load('https://i.imgur.com/qmh1xru.png'),
+  transparent: true
+    }));
+  targetFace1.rotation.x = -Math.PI/2;
+  targetFace1.position.set(0, 0.8, 0);
+  target.add(targetFace1);
+  
+  var targetFace2 = new THREE.Mesh(new THREE.PlaneGeometry(6,6,64,64),new THREE.MeshLambertMaterial({map: texture.load('https://i.imgur.com/qmh1xru.png'),
+  transparent: true
+    }));
+  targetFace2.rotation.x = Math.PI/2;
+  targetFace2.position.set(0, -0.8, 0);
+  target.add(targetFace2);
 
   return target;
 

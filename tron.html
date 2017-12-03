@@ -327,11 +327,12 @@
     target = buildTarget();
     scene.add(target);
     target.castShadow = true;
+    
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
       target.rotation.x=myRand(0,3);
     }while(target.position.distanceTo(new THREE.Vector3(0,0,0))< 47 );
-
+    
     /////////////////////////////////////////////////////////////////////////////
 
     miniTarget = buildMiniTarget();
@@ -697,11 +698,18 @@
 
       }
 
-      if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 42 && vel.length() > 10){
+      if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 43 && vel.length() > 10){
 
-        var n = new THREE.Vector3();
-        n = (ballPos.clone().sub(new THREE.Vector3(0,0,0))).normalize();
-        reflactVel(n);
+        var ballPosTemp = ballPos;
+
+        if( ballPos.distanceTo(new THREE.Vector3(0,0,0)) < 40){
+
+          ballPos.set(ballPosTemp.x, ballPosTemp.y, ballPosTemp.z);
+          var n = new THREE.Vector3();
+          n = (ballPos.clone().sub(new THREE.Vector3(0,0,0))).normalize();
+          reflactVel(n);
+
+        }
 
       }
 
