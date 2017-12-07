@@ -260,7 +260,7 @@ function buildAimLine(star,end){
   var lineEnd = end;
   var length = lineS.distanceTo(lineEnd);
   var lineObj = new THREE.Object3D();
-  var cylinderLine = new THREE.Mesh(new THREE.BoxGeometry (length, 2,2),new THREE.MeshNormalMaterial());
+  var cylinderLine = new THREE.Mesh(new THREE.BoxGeometry (length, 1,1),new THREE.MeshBasicMaterial({transparent: true, opacity: 0.5}));
 
   cylinderLine.position.x = length/2;
   lineObj.add(cylinderLine);

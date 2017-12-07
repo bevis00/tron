@@ -428,7 +428,7 @@
 
       tire.rotation.z -= 0.5;
       tire2.rotation.z -= 0.5;
-
+      scene.remove(line, lineR, lineR2);
 
     }
 
@@ -438,6 +438,8 @@
 
       tire.rotation.z -= 0.2;
       tire2.rotation.z += 0.2;
+      scene.remove(line, lineR, lineR2);
+
 
     }
 
@@ -447,8 +449,7 @@
 
       tire.rotation.z += 0.2;
       tire2.rotation.z -= 0.2;
-
-
+      scene.remove(line, lineR, lineR2);
 
     }
 
@@ -461,7 +462,7 @@
 
       }
 
-
+      scene.remove(line, lineR, lineR2);
 
     }
 
@@ -474,10 +475,12 @@
 
       }
 
+      scene.remove(line, lineR, lineR2);
 
     }
 
     if (keyboard.down("L")) {
+      
       line = buildAimLine(barrel.clone().localToWorld(new THREE.Vector3(0,0,0)),intersects[0].point.clone());
       line.position.copy(intersects[0].point);
       var angleA;
@@ -508,9 +511,7 @@
 
     if (keyboard.up("L")) {
 
-      scene.remove(line);
-      scene.remove(lineR);
-      scene.remove(lineR2);
+      scene.remove(line, lineR, lineR2);
 
     }
 
