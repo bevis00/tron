@@ -399,18 +399,23 @@ function animate() {
     laser = makeLaser();
     laserR = makeLaserR();
     fireBall();
-    line = buildAimLine();
-    lineR = buildAimLineR();
-    var mesh = new THREE.Mesh(new THREE.SphereGeometry(1.5),new THREE.MeshBasicMaterial());
-    mesh.position.y=barrel.clone().position.distanceTo(barrel.clone().worldToLocal(intersects[0].point.clone()))/2;
-    var pos = lineR.position.clone();
-    var angleA =  (intersects[0].point.clone().sub(barrel.clone().localToWorld(new THREE.Vector3()))).angleTo(intersectsR[0].point.clone().sub(intersects[0].point.clone()));
-    var axis   =  (intersects[0].point.clone().sub(barrel.clone().localToWorld(new THREE.Vector3()))).cross(intersectsR[0].point.clone().sub(intersects[0].point.clone()));
-    console.log(angleA);
-    pos.applyAxisAngle(axis.normalize(),angleA);
-    lineR.position.copy(pos);
-    barrel.add(line);line.add(mesh);mesh.add(lineR);
+    line = buildAimLine(barrel.clone().localToWorld(new THREE.Vector3(0,0,0)),intersects[0].point.clone());
+    line.position.copy(intersects[0].point);
+    var angleA;
+    var xAxis = new THREE.Vector3(1,0,0);
+    var cross = new THREE.Vector3();
+    cross.crossVectors(xAxis,barrel.clone().localToWorld(new THREE.Vector3(0,0,0)).sub(intersects[0].point.clone())).normalize();
+    angleA = xAxis.angleTo(barrel.clone().localToWorld(new THREE.Vector3(0,0,0)).sub(intersects[0].point.clone()));
+    line.rotateOnAxis (cross, angleA);
+    var crossR = new THREE.Vector3();
+    lineR = buildAimLine(intersects[0].point.clone(),intersectsR[0].point.clone());
+    lineR.position.copy(intersectsR[0].point);
+    crossR.crossVectors(xAxis,intersects[0].point.clone().sub(intersectsR[0].point)).normalize();
+    angleA = xAxis.angleTo(intersects[0].point.clone().sub(intersectsR[0].point));
+    lineR.rotateOnAxis(crossR , angleA);
 
+    scene.add(line);
+    scene.add(lineR);
     turret.add(laser);
     scene.add(laserR);
   }
@@ -419,7 +424,8 @@ function animate() {
 
     turret.remove(laser);
     scene.remove(laserR);
-    barrel.remove(line);
+    scene.remove(line);
+    scene.remove(lineR);
 
 
   }
@@ -498,28 +504,21 @@ function reflactVel(n){
   vel.sub(n.multiplyScalar(2 * (vel.dot(n)))).multiplyScalar(0.7);
 }
 
-
-function buildAimLine(){
-  var lineS =  barrel.clone().position;
-  var lineEnd = barrel.clone().worldToLocal(intersects[0].point.clone());
+function buildAimLine(star,end){
+  var lineS =  star;
+  var lineEnd = end;
   var length = lineS.distanceTo(lineEnd);
+  var lineObj = new THREE.Object3D();
+  var cylinderLine = new THREE.Mesh(new THREE.BoxGeometry (length, 2,2),new THREE.MeshNormalMaterial());
 
-  var cylinderLine = new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,length-6,4),new THREE.MeshNormalMaterial());
+  cylinderLine.position.x = length/2;
+  lineObj.add(cylinderLine);
 
-  cylinderLine.position.y = length/2+2;
 
-  return cylinderLine;
+  return lineObj;
 
 }
-function buildAimLineR(){
-  var lineS = intersects[0].point;
-  var lineEnd = intersectsR[0].point;
-  var length = lineS.distanceTo(lineEnd);
-  var cylinderLine = new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,length-6,4),new THREE.MeshBasicMaterial());
 
-  cylinderLine.position.y = length/2;
-  return cylinderLine;
-}
 window.focus();
 
 
