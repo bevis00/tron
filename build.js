@@ -29,9 +29,9 @@ function buildMiniLinePlanes() {
 
   var pxLine = new THREE.Line( geometry, material );
   scene2.add( pxLine );
-  
+
   ////////////////////////////////////////////////////////////////////////
-  
+
   var material = new THREE.LineDashedMaterial( {
     color: "red",
     dashSize: 10,
@@ -52,7 +52,7 @@ function buildMiniLinePlanes() {
   scene2.add( nxLine );
 
   ////////////////////////////////////////////////////////////////////////
-  
+
   var material = new THREE.LineBasicMaterial({
     color: 0x14ff00
   });
@@ -68,7 +68,7 @@ function buildMiniLinePlanes() {
 
   var pyLine = new THREE.Line( geometry, material );
   scene2.add( pyLine );
-  
+
   ////////////////////////////////////////////////////////////////////////
 
   var material = new THREE.LineDashedMaterial( {
@@ -89,9 +89,9 @@ function buildMiniLinePlanes() {
 
   var nyLine = new THREE.Line( geometry, material );
   scene2.add( nyLine );
-  
+
   ////////////////////////////////////////////////////////////////////////
-  
+
   var material = new THREE.LineBasicMaterial({
     color: "blue"
   });
@@ -107,9 +107,9 @@ function buildMiniLinePlanes() {
 
   var pzLine = new THREE.Line( geometry, material );
   scene2.add( pzLine );
-  
+
   ////////////////////////////////////////////////////////////////////////
-  
+
   var material = new THREE.LineDashedMaterial( {
     color: "blue",
     dashSize: 10,
@@ -160,7 +160,7 @@ function buildTarget(){
   targetFace1.rotation.x = -Math.PI/2;
   targetFace1.position.set(0, 0.8, 0);
   target.add(targetFace1);
-  
+
   var targetFace2 = new THREE.Mesh(new THREE.PlaneGeometry(6,6,64,64),new THREE.MeshLambertMaterial({map: texture.load('https://i.imgur.com/qmh1xru.png'),
   transparent: true
     }));
@@ -252,6 +252,21 @@ function buildBigBall() {
   var wireframeBall = new THREE.Mesh(new THREE.SphereGeometry(40.7,24,12), new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, transparent: true } ));
 
   scene.add(bigBall, wireframeBall);
+
+}
+
+function buildAimLine(star,end){
+  var lineS =  star;
+  var lineEnd = end;
+  var length = lineS.distanceTo(lineEnd);
+  var lineObj = new THREE.Object3D();
+  var cylinderLine = new THREE.Mesh(new THREE.BoxGeometry (length, 2,2),new THREE.MeshNormalMaterial());
+
+  cylinderLine.position.x = length/2;
+  lineObj.add(cylinderLine);
+
+
+  return lineObj;
 
 }
 

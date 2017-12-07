@@ -138,7 +138,7 @@
   var brick1, brick2;
 
   var intersects, intersectsR, intersectsR2;
-  var laser, laserR, laserR2;
+  var line , lineR , lineR2;
   var target;
 
   var uu = 0;
@@ -328,12 +328,12 @@
     target = buildTarget();
     scene.add(target);
     target.castShadow = true;
-    
+
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
       target.rotation.x=myRand(0,3);
     }while(target.position.distanceTo(new THREE.Vector3(0,0,0))< 47 );
-    
+
     /////////////////////////////////////////////////////////////////////////////
 
     miniTarget = buildMiniTarget();
@@ -381,7 +381,7 @@
     hintBall.position.set(19, -7.8, 0);
     motionHintBall.add(hintBall);
     motionHintBall.visible = false;
-    
+
     tank.add(motionHint, motionHintBall);
 
     /////////////////////////////////////////////////////////////////////////////
@@ -429,8 +429,6 @@
       tire.rotation.z -= 0.5;
       tire2.rotation.z -= 0.5;
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
 
     }
 
@@ -441,9 +439,6 @@
       tire.rotation.z -= 0.2;
       tire2.rotation.z += 0.2;
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
-
     }
 
     if (keyboard.pressed("D")) {
@@ -453,8 +448,7 @@
       tire.rotation.z += 0.2;
       tire2.rotation.z -= 0.2;
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
+
 
     }
 
@@ -467,8 +461,7 @@
 
       }
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
+
 
     }
 
@@ -481,26 +474,43 @@
 
       }
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
 
     }
 
     if (keyboard.down("L")) {
+      line = buildAimLine(barrel.clone().localToWorld(new THREE.Vector3(0,0,0)),intersects[0].point.clone());
+      line.position.copy(intersects[0].point);
+      var angleA;
+      var xAxis = new THREE.Vector3(1,0,0);
+      var cross = new THREE.Vector3();
+      cross.crossVectors(xAxis,barrel.clone().localToWorld(new THREE.Vector3(0,0,0)).sub(intersects[0].point.clone())).normalize();
+      angleA = xAxis.angleTo(barrel.clone().localToWorld(new THREE.Vector3(0,0,0)).sub(intersects[0].point.clone()));
+      line.rotateOnAxis (cross, angleA);
 
-      laser = makeLaser();
-      laserR = makeLaserR();
-      laserR2 = makeLaserR2();
+      var crossR = new THREE.Vector3();
+      lineR = buildAimLine(intersects[0].point.clone(),intersectsR[0].point.clone());
+      lineR.position.copy(intersectsR[0].point);
+      crossR.crossVectors(xAxis,intersects[0].point.clone().sub(intersectsR[0].point)).normalize();
+      angleA = xAxis.angleTo(intersects[0].point.clone().sub(intersectsR[0].point));
+      lineR.rotateOnAxis(crossR , angleA);
 
-      turret.add(laser);
-      scene.add(laserR, laserR2);
+      lineR2 = buildAimLine(intersectsR[0].point.clone(),intersectsR2[0].point.clone());
+      var crossR2 = new THREE.Vector3();
+      crossR2.crossVectors(xAxis,intersectsR[0].point.clone().sub(intersectsR2[0].point.clone())).normalize();
+      angleA = xAxis.angleTo(intersectsR[0].point.clone().sub(intersectsR2[0].point.clone()));
+      lineR2.rotateOnAxis(crossR2 , angleA);
+      lineR2.position.copy(intersectsR2[0].point);
+      scene.add(line);
+      scene.add(lineR);
+      scene.add(lineR2);
 
     }
 
     if (keyboard.up("L")) {
 
-      turret.remove(laser);
-      scene.remove(laserR, laserR2);
+      scene.remove(line);
+      scene.remove(lineR);
+      scene.remove(lineR2);
 
     }
 
@@ -529,7 +539,7 @@
     if(fire){
 
       if (keyboard.down("J")) {
-        
+
         ballPos=barrel.clone().localToWorld(new THREE.Vector3(0,0,0));
         ball.castShadow=true;
         ball.visible = true;
@@ -764,7 +774,7 @@
     // pos = pos + vel * dt
     ballPos.add(vel.clone().multiplyScalar(dt));
     ball.position.set(ballPos.x,ballPos.y,ballPos.z);
-    
+
     miniBall.position.copy(ball.position);
     changePlane();
     spotLight.position.set( tank.localToWorld(new THREE.Vector3(-45, 7, 0)).x, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).y, tank.localToWorld(new THREE.Vector3(-45, 7, 0)).z );
