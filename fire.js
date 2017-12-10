@@ -46,7 +46,7 @@ function raytest() {
     }
     if (intersects[0].object.name ==="Breakout"){
 
-      n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
+      n = intersects[0].point.clone().sub(new THREE.Vector3(0,0,0));
     }
 
       var r = laserdir.sub(n.multiplyScalar(2 * (laserdir.dot(n))));
@@ -143,7 +143,7 @@ function raytest() {
             }
             if (intersectsR2[0].object.name ==="Breakout"){
 
-              n = intersectsR[0].point.clone().sub(new THREE.Vector3(0,0,0));
+              n = intersectsR2[0].point.clone().sub(new THREE.Vector3(0,0,0));
             }
 
           }
