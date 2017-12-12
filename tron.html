@@ -47,11 +47,19 @@
 <script src="wheel.js"></script>
 <script src="stats.js"></script>
 <script src="ballRand.js"></script>
-<!--
-<audio id="DiscWars" autoplay loop style="display:none">
-<source src="sounds/DiscWars.mp3" type='audio/mpeg'>
+
+<audio id="EightiesAction" autoplay loop style="display:none">
+<source src="sounds/Eighties_Action.mp3" type='audio/mpeg'>
 </audio>
+
+<!--
+
+「Kevin MacLeod」創作的「Eighties Action」是根據「Creative Commons Attribution」(https://creativecommons.org/licenses/by/4.0/) 授權使用
+來源：http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100243
+演出者：http://incompetech.com/
+
 -->
+
 <audio id="fireSound" style="display:none">
 <source src="sounds/fire.mp3" type='audio/mpeg'>
 </audio>
@@ -151,7 +159,7 @@
   var miniTarget, targetTemp = new THREE.Vector3(), flash = 0, miniBall;
   var motionHint = new THREE.Object3D(), motionHintBall = new THREE.Object3D(), turn = false;
   var slow = false;
-  var fireSound, pickSound, flySound, DiscWars;
+  var fireSound, pickSound, flySound, EightiesAction;
   var spotLight;
 
 
@@ -160,10 +168,12 @@
 
   function init() {
 
-    DiscWars = document.getElementById ('DiscWars');
+    EightiesAction = document.getElementById ('EightiesAction');
     fireSound = document.getElementById ('fireSound');
     pickSound = document.getElementById ('pickSound');
     flySound = document.getElementById ('flySound');
+
+    EightiesAction.volume = 0.3;
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -187,7 +197,7 @@
     //////////////////////////////////////////////////////////////////////////////
 
     scene2 = new THREE.Scene();
-    scene2.add(new THREE.AxisHelper(25));
+    //scene2.add(new THREE.AxisHelper(25));
 
     var ww = $("#miniMap").innerWidth();
     var hh = $("#miniMap").innerHeight();
@@ -388,8 +398,8 @@
 
     buildWall();
 
-    stats = new Stats();
-    document.body.appendChild( stats.dom );
+    //stats = new Stats();
+    //document.body.appendChild( stats.dom );
     setInterval(blink, 300);
 
     document.body.appendChild(renderer.domElement);
@@ -792,7 +802,7 @@
 
     bigBall.visible = true;
 */
-    stats.update();
+    //stats.update();
     renderer.render(scene, camera);
     renderer2.render(scene2, camera2);
 
