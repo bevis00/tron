@@ -238,6 +238,7 @@ function buildLightBall() {
       emissive: 0xff0000
   }));
   ball.add(ballLight);
+  ball.visible = false;
   scene.add(ball);
 
 }
@@ -246,7 +247,6 @@ function buildBigBall() {
 
   bigBall = new THREE.Mesh(new THREE.SphereGeometry(40,32,32), material);
   bigBall.name = "Breakout";
-  ball.visible = false;
   pickables.push(bigBall);
 
   var wireframeBall = new THREE.Mesh(new THREE.SphereGeometry(40.7,24,12), new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, transparent: true } ));
