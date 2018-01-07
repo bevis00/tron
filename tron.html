@@ -585,56 +585,66 @@
   
       for (var i = 0; i < 362; i++) {
 
-          if (ballPos.z > wallPx[i].position.z - 5.3 && ballPos.z < wallPx[i].position.z + 5.3 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4  && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].visible === true ){
+          if (ballPos.z > wallPx[i].position.z - 5.3 && ballPos.z < wallPx[i].position.z + 5.3 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4  && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].alive === true ){
 
             if(vel.length() > 16){
               wallPx[i].visible = false;
+              wallPx[i].alive = false;
             }
+
             refalctionDec = true;
 
           }
 
-          if (ballPos.z > wallNx[i].position.z - 5.3 && ballPos.z < wallNx[i].position.z + 5.3 && ballPos.y > wallNx[i].position.y - 3.3 && ballPos.y < wallNx[i].position.y + 3.3 && ballPos.x < wallNx[i].position.x + 4 && ballPos.x > wallNx[i].position.x - 4 && wallNx[i].visible === true ){
+          if (ballPos.z > wallNx[i].position.z - 5.3 && ballPos.z < wallNx[i].position.z + 5.3 && ballPos.y > wallNx[i].position.y - 3.3 && ballPos.y < wallNx[i].position.y + 3.3 && ballPos.x < wallNx[i].position.x + 4 && ballPos.x > wallNx[i].position.x - 4 && wallNx[i].alive === true ){
 
             if(vel.length() > 16){
               wallNx[i].visible = false;
+              wallNx[i].alive = false;
             }
+
             refalctionDec = true;
 
           }
 
-          if (ballPos.x > wallPy[i].position.x - 5.3 && ballPos.x < wallPy[i].position.x + 5.3 && ballPos.z > wallPy[i].position.z - 3.3 && ballPos.z < wallPy[i].position.z + 3.3 && ballPos.y > wallPy[i].position.y - 4 && ballPos.y < wallPy[i].position.y + 4 && wallPy[i].visible === true ){
+          if (ballPos.x > wallPy[i].position.x - 5.3 && ballPos.x < wallPy[i].position.x + 5.3 && ballPos.z > wallPy[i].position.z - 3.3 && ballPos.z < wallPy[i].position.z + 3.3 && ballPos.y > wallPy[i].position.y - 4 && ballPos.y < wallPy[i].position.y + 4 && wallPy[i].alive === true ){
 
             if(vel.length() > 16){
               wallPy[i].visible = false;
+              wallPy[i].alive = false;
             }
+
             refalctionDec = true;
 
           }
 
-          if (ballPos.x > wallNy[i].position.x - 5.3 && ballPos.x < wallNy[i].position.x + 5.3 && ballPos.z > wallNy[i].position.z - 3.3 && ballPos.z < wallNy[i].position.z + 3.3 && ballPos.y < wallNy[i].position.y + 4 && ballPos.y > wallNy[i].position.y - 4 && wallNy[i].visible === true ){
+          if (ballPos.x > wallNy[i].position.x - 5.3 && ballPos.x < wallNy[i].position.x + 5.3 && ballPos.z > wallNy[i].position.z - 3.3 && ballPos.z < wallNy[i].position.z + 3.3 && ballPos.y < wallNy[i].position.y + 4 && ballPos.y > wallNy[i].position.y - 4 && wallNy[i].alive === true ){
 
             if(vel.length() > 16){
               wallNy[i].visible = false;
+              wallNy[i].alive = false;
             }
+
             refalctionDec = true;
 
           }
 
-          if (ballPos.x > wallPz[i].position.x - 5.3 && ballPos.x < wallPz[i].position.x + 5.3 && ballPos.y > wallPz[i].position.y - 3.3 && ballPos.y < wallPz[i].position.y + 3.3 && ballPos.z > wallPz[i].position.z - 4 && ballPos.z < wallPz[i].position.z + 4 && wallPz[i].visible === true ){
+          if (ballPos.x > wallPz[i].position.x - 5.3 && ballPos.x < wallPz[i].position.x + 5.3 && ballPos.y > wallPz[i].position.y - 3.3 && ballPos.y < wallPz[i].position.y + 3.3 && ballPos.z > wallPz[i].position.z - 4 && ballPos.z < wallPz[i].position.z + 4 && wallPz[i].alive === true ){
 
             if(vel.length() > 16){
               wallPz[i].visible = false;
+              wallPz[i].alive = false;
             }
 
             refalctionDec = true;
 
           }
 
-          if (ballPos.x > wallNz[i].position.x - 5.3 && ballPos.x < wallNz[i].position.x + 5.3 && ballPos.y > wallNz[i].position.y - 3.3 && ballPos.y < wallNz[i].position.y + 3.3 && ballPos.z < wallNz[i].position.z + 4 && ballPos.z > wallNz[i].position.z - 4 && wallNz[i].visible === true ){
+          if (ballPos.x > wallNz[i].position.x - 5.3 && ballPos.x < wallNz[i].position.x + 5.3 && ballPos.y > wallNz[i].position.y - 3.3 && ballPos.y < wallNz[i].position.y + 3.3 && ballPos.z < wallNz[i].position.z + 4 && ballPos.z > wallNz[i].position.z - 4 && wallNz[i].alive === true ){
 
             if(vel.length() > 16){
               wallNz[i].visible = false;
+              wallNz[i].alive = false;
             }
 
             refalctionDec = true;
@@ -645,49 +655,55 @@
 
       for (var i = 362; i < 388; i++) {
 
-        if (ballPos.z > wallPx[i].position.z - 2.8 && ballPos.z < wallPx[i].position.z + 2.8 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4 && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].visible === true ){
+        if (ballPos.z > wallPx[i].position.z - 2.8 && ballPos.z < wallPx[i].position.z + 2.8 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4 && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].alive === true ){
 
           if(vel.length() > 16){
             wallPx[i].visible = false;
+            wallPx[i].alive = false;
           }
 
           refalctionDec = true;
           }
 
-        if (ballPos.z > wallNx[i].position.z - 2.8 && ballPos.z < wallNx[i].position.z + 2.8 && ballPos.y > wallNx[i].position.y - 3.3 && ballPos.y < wallNx[i].position.y + 3.3 && ballPos.x < wallNx[i].position.x + 4 && ballPos.x > wallNx[i].position.x - 4 && wallNx[i].visible === true ){
+        if (ballPos.z > wallNx[i].position.z - 2.8 && ballPos.z < wallNx[i].position.z + 2.8 && ballPos.y > wallNx[i].position.y - 3.3 && ballPos.y < wallNx[i].position.y + 3.3 && ballPos.x < wallNx[i].position.x + 4 && ballPos.x > wallNx[i].position.x - 4 && wallNx[i].alive === true ){
           if(vel.length() > 16){
             wallNx[i].visible = false;
+            wallNx[i].alive = false;
           }
 
           refalctionDec = true;
           }
 
-        if (ballPos.x > wallPy[i].position.x - 2.8 && ballPos.x < wallPy[i].position.x + 2.8 && ballPos.z > wallPy[i].position.z - 3.3 && ballPos.z < wallPy[i].position.z + 3.3 && ballPos.y > wallPy[i].position.y - 4 && ballPos.y < wallPy[i].position.y + 4 && wallPy[i].visible === true ){
+        if (ballPos.x > wallPy[i].position.x - 2.8 && ballPos.x < wallPy[i].position.x + 2.8 && ballPos.z > wallPy[i].position.z - 3.3 && ballPos.z < wallPy[i].position.z + 3.3 && ballPos.y > wallPy[i].position.y - 4 && ballPos.y < wallPy[i].position.y + 4 && wallPy[i].alive === true ){
           if(vel.length() > 16){
             wallPy[i].visible = false;
+            wallPy[i].alive = false;
           }
 
           refalctionDec = true;
           }
 
-        if (ballPos.x > wallNy[i].position.x - 2.8 && ballPos.x < wallNy[i].position.x + 2.8 && ballPos.z > wallNy[i].position.z - 3.3 && ballPos.z < wallNy[i].position.z + 3.3 && ballPos.y < wallNy[i].position.y + 4 && ballPos.y > wallNy[i].position.y - 4 && wallNy[i].visible === true){
+        if (ballPos.x > wallNy[i].position.x - 2.8 && ballPos.x < wallNy[i].position.x + 2.8 && ballPos.z > wallNy[i].position.z - 3.3 && ballPos.z < wallNy[i].position.z + 3.3 && ballPos.y < wallNy[i].position.y + 4 && ballPos.y > wallNy[i].position.y - 4 && wallNy[i].alive === true){
 
           if(vel.length() > 16){
             wallNy[i].visible = false;
+            wallNy[i].alive = false;
           }
           refalctionDec = true;
           }
 
-        if (ballPos.x > wallPz[i].position.x - 2.8 && ballPos.x < wallPz[i].position.x + 2.8 && ballPos.y > wallPz[i].position.y - 3.3 && ballPos.y < wallPz[i].position.y + 3.3 && ballPos.z > wallPz[i].position.z - 4 && ballPos.z < wallPz[i].position.z + 4 && wallPz[i].visible === true ){
+        if (ballPos.x > wallPz[i].position.x - 2.8 && ballPos.x < wallPz[i].position.x + 2.8 && ballPos.y > wallPz[i].position.y - 3.3 && ballPos.y < wallPz[i].position.y + 3.3 && ballPos.z > wallPz[i].position.z - 4 && ballPos.z < wallPz[i].position.z + 4 && wallPz[i].alive === true ){
           if(vel.length() > 16){
             wallPz[i].visible = false;
+            wallPz[i].alive = false;
           }
           refalctionDec = true;
           }
 
-        if (ballPos.x > wallNz[i].position.x - 2.8 && ballPos.x < wallNz[i].position.x + 2.8 && ballPos.y > wallNz[i].position.y - 3.3 && ballPos.y < wallNz[i].position.y + 3.3 && ballPos.z < wallNz[i].position.z + 4 && ballPos.z > wallNz[i].position.z - 4 && wallNz[i].visible === true){
+        if (ballPos.x > wallNz[i].position.x - 2.8 && ballPos.x < wallNz[i].position.x + 2.8 && ballPos.y > wallNz[i].position.y - 3.3 && ballPos.y < wallNz[i].position.y + 3.3 && ballPos.z < wallNz[i].position.z + 4 && ballPos.z > wallNz[i].position.z - 4 && wallNz[i].alive === true){
           if(vel.length() > 16){
             wallNz[i].visible = false;
+            wallNz[i].alive = false;
           }
           refalctionDec = true;
           }

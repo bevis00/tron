@@ -337,6 +337,8 @@ function buildWall(){
 
     wallPx[i].rotation.y = -Math.PI / 2;
     wallPx[i].name = "wallPx";
+    wallPx[i].alive = true;
+    wallPx[i].material.color = new THREE.Color(0x8749b7);
 
   }
 
@@ -384,6 +386,7 @@ function buildWall(){
 
     wallNx[i].rotation.y = Math.PI / 2;
     wallNx[i].name = "wallNx";
+    wallNx[i].alive = true;
     wallNx[i].material.color = new THREE.Color(0x8749b7);
 
   }
@@ -432,6 +435,7 @@ function buildWall(){
 
     wallPy[i].rotation.x = Math.PI / 2;
     wallPy[i].name = "wallPy";
+    wallPy[i].alive = true;
     wallPy[i].material.color = new THREE.Color(0x408449);
 
   }
@@ -480,6 +484,7 @@ function buildWall(){
 
     wallNy[i].rotation.x = -Math.PI / 2;
     wallNy[i].name = "wallNy";
+    wallNy[i].alive = true;
     wallNy[i].material.color = new THREE.Color(0xb78549);
 
   }
@@ -528,6 +533,7 @@ function buildWall(){
 
     wallPz[i].rotation.y = Math.PI;
     wallPz[i].name = "wallPz";
+    wallPz[i].alive = true;
     wallPz[i].material.color = new THREE.Color(0xa1b749);
 
   }
@@ -575,6 +581,7 @@ function buildWall(){
   for (var i = 0; i < 388; i++) {
 
     wallNz[i].name = "wallNz";
+    wallNz[i].alive = true;
     wallNz[i].material.color = new THREE.Color(0x4949b7);
 
   }
