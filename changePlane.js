@@ -440,7 +440,7 @@ function changePlane(){
       for (var i = 0; i < 388; i++)
         if(wallNy[i].alive === true)
           wallNy[i].visible = true;
-    
+
   }
 
   //change to facePy
@@ -597,5 +597,15 @@ function changePlane(){
     vP = v.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
   }
-  
+
+}
+
+function changePlaneAnimation(anix,angle){
+
+  quat1.setsetFromRotationMatrix(tank.matrix);
+  quat2.set.setFromAxisAngle (axis, angle );
+
+
+
+
 }
