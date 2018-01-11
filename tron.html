@@ -139,8 +139,6 @@
   var angle = 0;
   var change = 0;
   var changeX = 0, changeY = 1, changeZ = 0;
-  var quat1 = new THREE.Quaternion();
-  var quat2 = new THREE.Quaternion();
 
   var pickables = [];
   var planes = [];
@@ -166,6 +164,11 @@
   var ballPosTemp = new THREE.Vector3();
   var refalctionDec = false;
   var bigBallrefalctionDec = false;
+  var alpha = 0;
+  var pos1, pos2, quat1, quat2;
+  var localX, localY, localZ;
+  var changeX2 = 0, changeY2 = 0, changeZ2 = 0;
+  var ban = false;
 
   init();
   animate();
@@ -400,6 +403,8 @@
 
     /////////////////////////////////////////////////////////////////////////////
 
+    tank.matrixAutoUpdate = false;
+
     buildWall();
 
     //stats = new Stats();
@@ -446,24 +451,29 @@
 
     }
 
-    if (keyboard.pressed("A")) {
-
-      change += 0.035;
-
-      tire.rotation.z -= 0.2;
-      tire2.rotation.z += 0.2;
-      scene.remove(line, lineR, lineR2);
+    if(ban === false){
 
 
-    }
+      if (keyboard.pressed("A")) {
 
-    if (keyboard.pressed("D")) {
+        change += 0.035;
 
-      change += -0.035;
+        tire.rotation.z -= 0.2;
+        tire2.rotation.z += 0.2;
+        scene.remove(line, lineR, lineR2);
 
-      tire.rotation.z += 0.2;
-      tire2.rotation.z -= 0.2;
-      scene.remove(line, lineR, lineR2);
+
+      }
+
+      if (keyboard.pressed("D")) {
+
+        change += -0.035;
+
+        tire.rotation.z += 0.2;
+        tire2.rotation.z -= 0.2;
+        scene.remove(line, lineR, lineR2);
+
+      }
 
     }
 
@@ -579,12 +589,12 @@
       flySound.play();
 
       Targeting();
-
+      
       if( ballPos.distanceTo(bigBall.localToWorld(new THREE.Vector3(0,0,0))) < 40 ){
         ballPosTemp = ballPos.clone();
         bigBallrefalctionDec = true;
       }
-
+  
       for (var i = 0; i < 362; i++) {
 
           if (ballPos.z > wallPx[i].position.z - 5.3 && ballPos.z < wallPx[i].position.z + 5.3 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4  && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].alive === true ){
@@ -755,7 +765,7 @@
         ballLight.color = new THREE.Color(0x0000ff);
 
       }
-
+      
 
       if( bigBallrefalctionDec && vel.length() > 10){
 
