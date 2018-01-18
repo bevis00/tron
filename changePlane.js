@@ -103,10 +103,10 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
-      
+
 
       if(changeX2 === 0 && changeY2 === 0 && changeZ2 === 1){
 
@@ -315,7 +315,7 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
 
@@ -526,7 +526,7 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
 
@@ -736,7 +736,7 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
 
@@ -946,10 +946,10 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
-      
+
 
       if(changeX2 === 0 && changeY2 === -1 && changeZ2 === 0){
 
@@ -984,7 +984,7 @@ function changePlane(){
 
     }
 
-    
+
   }
 
   //change to facePy
@@ -1158,10 +1158,10 @@ function changePlane(){
     }
 
     if(tank.matrixAutoUpdate === true){
-      
+
       if(alpha < 1)
         alpha += 0.0001;
-      
+
 
       if(changeX2 === 0 && changeY2 === -1 && changeZ2 === 0){
 
@@ -1196,7 +1196,7 @@ function changePlane(){
 
     }
 
-    
+
   }
 
   //change to faceNy
@@ -1270,5 +1270,22 @@ function changePlane(){
     vP = v.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
   }
-  
+
+}
+
+function turn (pos1, quat1, pos2, quat2 ) {
+  console.log ('in turn')
+
+  alpha += 0.01;
+
+  var qm = quat1.clone();
+  qm.slerp(quat2, alpha);
+
+	plane.matrix.makeRotationFromQuaternion (qm);
+
+  var pp = pos1.clone();
+  pp.lerp(pos2, alpha);
+  plane.matrix.setPosition(pp);
+  return alpha;
+
 }
