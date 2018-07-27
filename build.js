@@ -147,13 +147,16 @@ function buildTank() {
 
 function buildTarget(){
 
-  var target = new THREE.Mesh(new THREE.CylinderGeometry(3,3,1.5,35),new THREE.MeshBasicMaterial({
-    color: 0x888888
-  }));
-
   var texture = new THREE.TextureLoader();
   texture.setCrossOrigin('');
 
+  var target = THREE.SceneUtils.createMultiMaterialObject(new THREE.SphereGeometry(3,32,32),[new THREE.MeshLambertMaterial({map: texture.load('https://i.imgur.com/wyF1gVP.png'),
+  transparent: true
+    }), new THREE.MeshLambertMaterial({
+    color: 0xf4f142
+  })]);
+
+/*
   var targetFace1 = new THREE.Mesh(new THREE.PlaneGeometry(6,6,64,64),new THREE.MeshLambertMaterial({map: texture.load('https://i.imgur.com/qmh1xru.png'),
   transparent: true
     }));
@@ -167,6 +170,7 @@ function buildTarget(){
   targetFace2.rotation.x = Math.PI/2;
   targetFace2.position.set(0, -0.8, 0);
   target.add(targetFace2);
+*/
 
   return target;
 
@@ -308,6 +312,142 @@ function buildLight() {
   scene.add(pointLightMid);
   pointLightMid.shadow.bias = -.0001
 
+}
+
+function buildSec1Geometry() {
+
+  var geometry = new THREE.Geometry();
+  
+  geometry.vertices.push(
+    new THREE.Vector3(26.853, -11.105, 0),
+    new THREE.Vector3(42.853, -11.105, 0),
+    new THREE.Vector3(42.853, 11.105, 0),
+    new THREE.Vector3(26.853, 11.105, 0)
+  );
+
+  var face;
+  
+  face = new THREE.Face3(0, 1, 2);
+  geometry.faces.push(face);
+  face = new THREE.Face3(0, 2, 3);
+  geometry.faces.push(face);
+
+  st0 = new THREE.Vector2(0, 0.5);
+  st1 = new THREE.Vector2(0.2, 0.5);
+  st2 = new THREE.Vector2(0.2, 1);
+  st3 = new THREE.Vector2(0, 1);
+  
+  geometry.faceVertexUvs[0].push([st0, st1, st2]);
+  geometry.faceVertexUvs[0].push([st0, st2, st3]);
+
+  geometry.computeBoundingSphere();
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+  
+  return geometry;
+  
+}
+
+function buildSec2Geometry() {
+
+  var geometry = new THREE.Geometry();
+  
+  geometry.vertices.push(
+    new THREE.Vector3(10.853, -11.105, 0),
+    new THREE.Vector3(26.853, -11.105, 0),
+    new THREE.Vector3(26.853, 11.105, 0),
+    new THREE.Vector3(10.853, 11.105, 0)
+  );
+
+  var face;
+  
+  face = new THREE.Face3(0, 1, 2);
+  geometry.faces.push(face);
+  face = new THREE.Face3(0, 2, 3);
+  geometry.faces.push(face);
+
+  st0 = new THREE.Vector2(0, 0.5);
+  st1 = new THREE.Vector2(0.2, 0.5);
+  st2 = new THREE.Vector2(0.2, 1);
+  st3 = new THREE.Vector2(0, 1);
+  
+  geometry.faceVertexUvs[0].push([st0, st1, st2]);
+  geometry.faceVertexUvs[0].push([st0, st2, st3]);
+
+  geometry.computeBoundingSphere();
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+  
+  return geometry;
+  
+}
+
+function buildMin1Geometry() {
+
+  var geometry = new THREE.Geometry();
+  
+  geometry.vertices.push(
+    new THREE.Vector3(-24.853, -11.105, 0),
+    new THREE.Vector3(-8.853, -11.105, 0),
+    new THREE.Vector3(-8.853, 11.105, 0),
+    new THREE.Vector3(-24.853, 11.105, 0)
+  );
+
+  var face;
+  
+  face = new THREE.Face3(0, 1, 2);
+  geometry.faces.push(face);
+  face = new THREE.Face3(0, 2, 3);
+  geometry.faces.push(face);
+
+  st0 = new THREE.Vector2(0, 0.5);
+  st1 = new THREE.Vector2(0.2, 0.5);
+  st2 = new THREE.Vector2(0.2, 1);
+  st3 = new THREE.Vector2(0, 1);
+  
+  geometry.faceVertexUvs[0].push([st0, st1, st2]);
+  geometry.faceVertexUvs[0].push([st0, st2, st3]);
+
+  geometry.computeBoundingSphere();
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+  
+  return geometry;
+  
+}
+
+function buildMin2Geometry() {
+
+  var geometry = new THREE.Geometry();
+  
+  geometry.vertices.push(
+    new THREE.Vector3(-40.853, -11.105, 0),
+    new THREE.Vector3(-24.853, -11.105, 0),
+    new THREE.Vector3(-24.853, 11.105, 0),
+    new THREE.Vector3(-40.853, 11.105, 0)
+  );
+
+  var face;
+  
+  face = new THREE.Face3(0, 1, 2);
+  geometry.faces.push(face);
+  face = new THREE.Face3(0, 2, 3);
+  geometry.faces.push(face);
+
+  st0 = new THREE.Vector2(0, 0.5);
+  st1 = new THREE.Vector2(0.2, 0.5);
+  st2 = new THREE.Vector2(0.2, 1);
+  st3 = new THREE.Vector2(0, 1);
+  
+  geometry.faceVertexUvs[0].push([st0, st1, st2]);
+  geometry.faceVertexUvs[0].push([st0, st2, st3]);
+
+  geometry.computeBoundingSphere();
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+  
+  return geometry;
+  
 }
 
 function buildWall(){

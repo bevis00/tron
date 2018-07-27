@@ -1,17 +1,12 @@
 
 function Matrix4Update(newPos, newDir, newMiniPos) {
-  tank.matrixAutoUpdate = false;
-  var pos = new THREE.Vector3 (  // copy NOW pos from matrix
-    tank.matrix.elements[12], tank.matrix.elements[13],
-    tank.matrix.elements[14]);
-  var newPos4 = pos.clone().add (newPos);
 
   localX = newDir.clone();
   localY = new THREE.Vector3(changeX, changeY, changeZ);
   localZ = new THREE.Vector3();
   localZ.crossVectors(localX, localY);
   tank.matrix.makeBasis(localX, localY, localZ);
-  tank.matrix.setPosition(newPos4);
+  tank.matrix.setPosition(newPos);
   tank.matrixAutoUpdate = false;
 
   //////////////////////////////////////////////////////////////////////////////
@@ -24,10 +19,11 @@ function Matrix4Update(newPos, newDir, newMiniPos) {
 
 function moveOnNy() {
 
-  var newPos = new THREE.Vector3(go, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), totalChange);
+  var newPos = tank.localToWorld(new THREE.Vector3(go, 0, 0));
+  newPos.y = -67;
 
-  var newMiniPos = tank.localToWorld(new THREE.Vector3(go, 0, 0));
-  newMiniPos.y = -75;
+  var newMiniPos = newPos.clone();
+  newMiniPos.y = -75
 
   var newDir = vP.normalize();
   newDir.applyAxisAngle(new THREE.Vector3(0, 1, 0), change);
@@ -39,11 +35,16 @@ function moveOnNy() {
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
 
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
+
 }
 
 function moveOnPx() {
 
-  var newPos = new THREE.Vector3(0, go, 0).applyAxisAngle(new THREE.Vector3(-1, 0, 0), totalChange);
+  var newPos = tank.localToWorld(new THREE.Vector3(go, 0, 0));
+  newPos.x = 67;
 
   var newMiniPos = newPos.clone();
   newMiniPos.x = 75
@@ -57,6 +58,10 @@ function moveOnPx() {
   upTemp.set(-1, 0, 0);
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
+
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
 
 }
 
@@ -78,6 +83,10 @@ function moveOnPy() {
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
 
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
+
 }
 
 function moveOnNx() {
@@ -97,6 +106,10 @@ function moveOnNx() {
   upTemp.set(1, 0, 0);
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
+
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
 
 }
 
@@ -118,6 +131,10 @@ function moveOnPz() {
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
 
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
+
 }
 
 function moveOnNz() {
@@ -137,5 +154,9 @@ function moveOnNz() {
   upTemp.set(0, 0, 1);
   camera.up.copy(upTemp);
   camera.lookAt(barrel.localToWorld(new THREE.Vector3(0, 10, 0)));
+
+  gameOverHint.position.copy(tank.localToWorld(new THREE.Vector3(-20,10,0)));
+  gameOverHint.up.copy(upTemp);
+  gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
 
 }

@@ -114,14 +114,51 @@ function raytest() {
 
 function Targeting(){
 
+  /*
   if(ball.position.distanceTo(target.position) < 5){
     do{
       target.position.set(myRand(-65,65),myRand(-65,65),myRand(-65,65));
       target.rotation.x=myRand(0,3);
     }while(target.position.distanceTo(new THREE.Vector3(0,0,0))< 47 );
   }
+  */
 
-  miniTarget.position.copy(target.position);
+  if(ball.position.distanceTo(target.position) < 5){
+
+    target.visible = false;
+    miniTarget.visible = false;
+
+  }
+
+  if(ball.position.distanceTo(target1.position) < 5){
+
+    target1.visible = false;
+    miniTarget1.visible = false;
+
+  }
+
+  if(ball.position.distanceTo(target2.position) < 5){
+
+    target2.visible = false;
+    miniTarget2.visible = false;
+
+  }
+
+  if(ball.position.distanceTo(target3.position) < 5){
+
+    target3.visible = false;
+    miniTarget3.visible = false;
+
+  }
+
+  if(ball.position.distanceTo(target4.position) < 5){
+
+    target4.visible = false;
+    miniTarget4.visible = false;
+
+  }
+
+  //miniTarget.position.copy(target.position);
 
 }
 
