@@ -11,8 +11,32 @@ function changePlane(){
 
       moveOnNy();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.x > 74)
       for (var i = 0; i < 388; i++)
@@ -223,8 +247,32 @@ function changePlane(){
 
       moveOnPx();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.y > 74)
       for (var i = 0; i < 388; i++)
@@ -434,8 +482,32 @@ function changePlane(){
 
       moveOnPy();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.x > 74)
       for (var i = 0; i < 388; i++)
@@ -644,8 +716,32 @@ function changePlane(){
 
       moveOnNx();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.y > 74)
       for (var i = 0; i < 388; i++)
@@ -854,8 +950,32 @@ function changePlane(){
 
       moveOnNz();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.x > 74)
       for (var i = 0; i < 388; i++)
@@ -1066,8 +1186,32 @@ function changePlane(){
 
       moveOnPz();
 
-    motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
-    motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+    if(target.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target1.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target1.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target2.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target2.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target3.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target3.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }else if(target4.visible === true){
+
+      motionHint.rotation.y = Math.atan2( -tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(target4.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+      motionHintBall.rotation.y = Math.atan2( -tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).z, tank.worldToLocal(ball.localToWorld(new THREE.Vector3(0, 0, 0))).x );
+
+    }
 
     if(camera.position.x > 74)
       for (var i = 0; i < 388; i++)

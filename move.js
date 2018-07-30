@@ -39,6 +39,13 @@ function moveOnNy() {
   gameOverHint.up.copy(upTemp);
   gameOverHint.lookAt(tank.localToWorld(new THREE.Vector3(-30,10,0)));
 
+  if(gameStart === false){
+
+    gameStartHint.position.copy(camera.localToWorld(new THREE.Vector3(0,0,-20)));
+    gameStartHint.lookAt(camera.localToWorld(new THREE.Vector3(0,0,100)));
+
+  }
+
 }
 
 function moveOnPx() {
