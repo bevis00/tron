@@ -485,16 +485,16 @@
 
     gameOverHint = new THREE.Mesh( new THREE.PlaneGeometry( 50, 20, 32 ), new THREE.MeshBasicMaterial( {map: texture.load('https://i.imgur.com/a5cmCA6.png'),
   transparent: true} ) );
-    
+
     gameOverHint.visible = false;
 
     scene.add(gameOverHint);
 
     /////////////////////////////////////////////////////////////////////////////
 
-    gameStartHint = new THREE.Mesh( new THREE.PlaneGeometry( 39.44, 19.52, 32 ), new THREE.MeshBasicMaterial( {map: texture.load('https://i.imgur.com/AAt138q.png'),
+    gameStartHint = new THREE.Mesh( new THREE.PlaneGeometry( 39.44, 19.52, 32 ), new THREE.MeshBasicMaterial( {map: texture.load('https://i.imgur.com/WQlpQMV.png'),
   transparent: true} ) );
-    
+
     scene.add(gameStartHint);
 
     /////////////////////////////////////////////////////////////////////////////
@@ -616,7 +616,7 @@
         texture.offset.y += 0.5;
 
       counter++;
-      
+
       if(counter%10 === 0){
 
         var texture = timer2.material.map;
@@ -663,7 +663,7 @@
       }
 
     }
-  
+
   }
 
   function blink() {
@@ -851,12 +851,12 @@
         flySound.play();
 
         Targeting();
-        
+
         if( ballPos.distanceTo(bigBall.localToWorld(new THREE.Vector3(0,0,0))) < 40 ){
           ballPosTemp = ballPos.clone();
           bigBallrefalctionDec = true;
         }
-    
+
         for (var i = 0; i < 362; i++) {
 
             if (ballPos.z > wallPx[i].position.z - 5.3 && ballPos.z < wallPx[i].position.z + 5.3 && ballPos.y > wallPx[i].position.y - 3.3 && ballPos.y < wallPx[i].position.y + 3.3 && ballPos.x > wallPx[i].position.x - 4  && ballPos.x < wallPx[i].position.x + 4 && wallPx[i].alive === true ){
@@ -1027,7 +1027,7 @@
           ballLight.color = new THREE.Color(0x0000ff);
 
         }
-        
+
 
         if( bigBallrefalctionDec && vel.length() > 10){
 
